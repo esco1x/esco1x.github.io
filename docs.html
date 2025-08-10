@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Game API Docs</title>
+  <link rel="stylesheet" href="./style.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
+  <meta name="description" content="Explore Egg's Game API Docs for Fortnite, Roblox, Valorant, Steam, and more." />
+  <meta name="theme-color" content="#161616" />
+</head>
+<body>
+  <div class="sidebar" id="sidebar"></div>
+  <div class="main">
+    <div class="search-container">
+      <input type="text" id="searchInput" placeholder="Search files or folders...">
+      <select id="searchFilter">
+        <option value="all">All</option>
+        <option value="file">Files only</option>
+        <option value="folder">Folders only</option>
+      </select>
+    </div>
+    <div class="content" id="content">
+      <h1>Welcome</h1>
+      <p>Select a folder or API endpoint from the sidebar to begin.</p>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  <script src="./script.js"></script>
+</body>
+</html>
