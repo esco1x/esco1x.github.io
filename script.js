@@ -16,7 +16,7 @@ async function init() {
 
         const homeDiv = document.createElement("div");
         homeDiv.id = "sidebar-home";
-        homeDiv.innerHTML = `<a href="../index.html" class="home-button">Home</a>`;
+        homeDiv.innerHTML = `<a href="../" class="home-button">Home</a>`;
         sidebar.appendChild(homeDiv);
     } catch (err) {
         console.error("Error loading API data:", err);
