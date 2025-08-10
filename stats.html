@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Documentation Stats</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+            background: var(--bg, #121212);
+            color: var(--text, #fff);
+            user-select: none;
+        }
+
+        .stats-container {
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .stats-header {
+            font-size: 1.5rem;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .stats-grid,
+        .fun-facts-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: flex-start;
+        }
+
+        .stat-box {
+            background: var(--bg-alt, #1e1e1e);
+            border: 1px solid var(--border, #333);
+            padding: 1rem 1.2rem;
+            border-radius: 8px;
+            min-width: 240px;
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            flex: 1 1 240px;
+        }
+
+        .stat-inline {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            width: 100%;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-title {
+            font-weight: 600;
+            color: var(--text, #ddd);
+            font-size: 1rem;
+            word-break: break-word;
+            max-width: 70%;
+        }
+
+        .stat-value {
+            font-size: 1.1rem;
+            color: #f0da4c;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+
+        .stat-sublist {
+            font-size: 0.85rem;
+            color: var(--text-muted, #999);
+            width: 100%;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        .stat-sublist ul {
+            margin: 0;
+            padding-left: 1.2rem;
+        }
+
+        .stat-sublist li {
+            line-height: 1.4;
+        }
+
+        .fun-facts-header {
+            font-size: 1.5rem;
+            text-align: center;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .fun-fact-box {
+            background: var(--bg-alt, #1e1e1e);
+            border: 1px solid var(--border, #333);
+            padding: 1rem 1.2rem;
+            border-radius: 8px;
+            flex: 1 1 300px;
+            min-width: 280px;
+            max-width: 100%;
+            color: var(--text, #eee);
+            font-size: 1rem;
+            font-weight: bold;
+            font-style: italic;
+            line-height: 1.5;
+            word-break: break-word;
+            overflow-wrap: break-word;
+        }
+
+        .home-button-container {
+            margin-top: 2rem;
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .enter-button {
+            display: inline-block;
+            background: var(--accent);
+            background-color: #1e1e1e;
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 0.75rem 1.5rem;
+            border-radius: 6px;
+            transition: background 0.2s ease, transform 0.2s ease;
+            margin-top: 1rem;
+        }
+
+        .enter-button:hover {
+            background: #2563eb;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="stats-container">
+        <h1 class="stats-header">Egg's Documentation Stat Overview</h1>
+
+        <div id="statsGrid" class="stats-grid"></div>
+
+        <h2 class="fun-facts-header">Fun Facts</h2>
+        <div id="funFactsGrid" class="fun-facts-grid"></div>
+    </div>
+
+    <script>
+        fetch("http://docs-api-dpdg.onrender.com/api/docs/stats")
+            .then(res => res.json())
+            .then(data => {
+                const stats = data.data;
+                const container = document.getElementById("statsGrid");
+
+                const entries = Object.entries(stats);
+
+                for (const [key, value] of entries) {
+                    const box = document.createElement("div");
+                    box.className = "stat-box";
+
+                    const topLine = document.createElement("div");
+                    topLine.className = "stat-inline";
+
+                    const title = document.createElement("div");
+                    title.className = "stat-title";
+                    title.textContent = key.replace(/([A-Z])/g, ' $1').replace(/^./, s => s.toUpperCase());
+
+                    topLine.appendChild(title);
+
+                    if (typeof value === "object" && !Array.isArray(value)) {
+                        box.appendChild(topLine);
+
+                        const list = document.createElement("div");
+                        list.className = "stat-sublist";
+                        list.innerHTML = `<ul>${Object.entries(value).map(([k, v]) => `<li><b>${k}</b>: ${v}</li>`).join("")}</ul>`;
+                        box.appendChild(list);
+                    } else if (Array.isArray(value)) {
+                        box.appendChild(topLine);
+
+                        const list = document.createElement("div");
+                        list.className = "stat-sublist";
+                        list.innerHTML = `<ul>${value.map(v => `<li>${v}</li>`).join("")}</ul>`;
+                        box.appendChild(list);
+                    } else {
+                        const val = document.createElement("div");
+                        val.className = "stat-value";
+                        val.textContent = value;
+
+                        topLine.appendChild(val);
+                        box.appendChild(topLine);
+                    }
+
+                    container.appendChild(box);
+                }
+            });
+
+        fetch("http://docs-api-dpdg.onrender.com/api/docs/funfact")
+            .then(res => res.json())
+            .then(data => {
+                const facts = data.facts;
+                const factsGrid = document.getElementById("funFactsGrid");
+
+                facts.forEach(fact => {
+                    const box = document.createElement("div");
+                    box.className = "fun-fact-box";
+
+                    const content = document.createElement("div");
+                    content.textContent = fact;
+
+                    box.appendChild(content);
+                    factsGrid.appendChild(box);
+                });
+            })
+            .catch(err => {
+                console.error("Failed to load fun facts:", err);
+            })
+    </script>
+
+    <div class="home-button-container">
+        <a href="./index.html" class="enter-button">Home</a>
+    </div>
+</body>
+
+</html>
