@@ -26,6 +26,72 @@ async function init() {
 
 init();
 
+function makeSidebarResizable() {
+    const sidebar = document.querySelector(".sidebar");
+    if (!sidebar) return;
+
+    const resizer = document.createElement("div");
+    resizer.className = "sidebar-resizer";
+    sidebar.appendChild(resizer);
+
+    let isResizing = false;
+    let startX = 0;
+    let startWidth = 0;
+
+    resizer.addEventListener("mousedown", (e) => {
+        e.preventDefault();
+        isResizing = true;
+        startX = e.clientX;
+        startWidth = sidebar.getBoundingClientRect().width;
+        document.body.style.userSelect = "none";
+        document.body.style.cursor = "col-resize";
+    });
+
+    document.addEventListener("mousemove", (e) => {
+        if (!isResizing) return;
+        const dx = e.clientX - startX;
+        let newWidth = startWidth + dx;
+        const minWidth = 150;
+        const maxWidth = 600;
+
+        if (newWidth < minWidth) newWidth = minWidth;
+        if (newWidth > maxWidth) newWidth = maxWidth;
+
+        sidebar.style.width = `${newWidth}px`;
+    });
+
+    document.addEventListener("mouseup", () => {
+        if (!isResizing) return;
+        isResizing = false;
+        document.body.style.userSelect = "";
+        document.body.style.cursor = "";
+    });
+
+    // optional: basic touch support
+    resizer.addEventListener("touchstart", (e) => {
+        e.preventDefault();
+        isResizing = true;
+        startX = e.touches[0].clientX;
+        startWidth = sidebar.getBoundingClientRect().width;
+        document.body.style.userSelect = "none";
+    }, { passive: false });
+
+    document.addEventListener("touchmove", (e) => {
+        if (!isResizing) return;
+        const dx = e.touches[0].clientX - startX;
+        let newWidth = startWidth + dx;
+        newWidth = Math.max(150, Math.min(600, newWidth));
+        sidebar.style.width = `${newWidth}px`;
+    }, { passive: false });
+
+    document.addEventListener("touchend", () => {
+        isResizing = false;
+        document.body.style.userSelect = "";
+    });
+}
+
+makeSidebarResizable();
+
 let folderHistory = [];
 
 function renderSidebar(data, parent, level = 0, parentPath = "") {
@@ -43,29 +109,37 @@ function renderSidebar(data, parent, level = 0, parentPath = "") {
                 displayApi(item, currentPath);
             });
 
-            li.style.paddingLeft = `${1.5 + level * 1.25}rem`;
+            // Set CSS variable so deep levels keep indenting (and use inline calc as a fallback)
+            li.style.setProperty("--level", level);
+            li.style.paddingLeft = `calc(0.8rem + var(--level) * 0.9rem)`;
             parent.appendChild(li);
         } else {
             const div = document.createElement("div");
             div.classList.add("category");
             div.dataset.level = level;
+            // expose the level as a CSS variable so CSS rules using var(--level) work
+            div.style.setProperty("--level", level);
 
             const header = document.createElement("div");
             header.className = "category-header";
             header.textContent = "📁 " + item.name;
             header.dataset.path = currentPath;
             header.dataset.type = "folder";
+            header.style.setProperty("--level", level);
 
             const items = document.createElement("ul");
             items.className = "category-items";
             items.dataset.path = currentPath;
             items.dataset.level = level + 1;
+            // set CSS variable for children (li) indentation
+            items.style.setProperty("--level", level + 1);
             items.style.display = "none";
 
+            // Toggle open/close on click (clean behaviour)
             header.addEventListener("click", () => {
                 setActiveSidebar(currentPath);
                 displayFolder(item, currentPath);
-                items.style.display = "block";
+                items.style.display = items.style.display === "block" ? "none" : "block";
             });
 
             header.addEventListener("dblclick", () => {
