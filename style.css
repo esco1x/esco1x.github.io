@@ -73,6 +73,28 @@ body {
   padding: 1rem;
 }
 
+/* Make sure our var(--level) based padding never explodes visually */
+.category-header {
+  padding-left: clamp(0.5rem, calc(0.5rem + var(--level, 0) * 0.9rem), 6rem);
+}
+
+.category-items li {
+  padding-left: clamp(0.5rem, calc(0.8rem + var(--level, 0) * 0.9rem), 6rem);
+}
+
+/* keep the resizer visible/useful */
+.sidebar-resizer {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 6px;
+    height: 100%;
+    cursor: col-resize;
+    background: transparent;
+    z-index: 10;
+}
+.sidebar-resizer:hover { background: rgba(255,255,255,0.06); }
+
 .category {
   margin-bottom: 0.5rem;
 }
