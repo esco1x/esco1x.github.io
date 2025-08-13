@@ -2,7 +2,7 @@ let apiData = []; // global placeholder
 
 async function init() {
     try {
-        const res = await fetch("https://docs-api-dpdg.onrender.com/api/docs/all");
+        const res = await fetch("https://api.eggrial.lol/api/docs/all");
         if (!res.ok) throw new Error("Failed to fetch api data");
         apiData = await res.json();
 
