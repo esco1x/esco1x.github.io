@@ -149,7 +149,7 @@
     </div>
 
     <script>
-        fetch("https://docs-api-dpdg.onrender.com/api/docs/stats")
+        fetch("https://api.eggrial.lol/api/docs/stats")
             .then(res => res.json())
             .then(data => {
                 const stats = data.data;
@@ -197,7 +197,7 @@
                 }
             });
 
-        fetch("https://docs-api-dpdg.onrender.com/api/docs/funfact")
+        fetch("https://api.eggrial.lol/api/docs/funfact")
             .then(res => res.json())
             .then(data => {
                 const facts = data.facts;
