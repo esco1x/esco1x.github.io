@@ -2,7 +2,7 @@ let apiData = []; // global placeholder
 
 async function init() {
     try {
-        const res = await fetch("https://api.eggrial.lol/api/docs/all");
+        const res = await fetch(`https://api.eggrial.lol/api/docs/all`);
         if (!res.ok) throw new Error("Failed to fetch api data");
         apiData = await res.json();
 
@@ -16,19 +16,24 @@ async function init() {
 
         const homeDiv = document.createElement("div");
         homeDiv.id = "sidebar-home";
-        homeDiv.innerHTML = `<a href="../" class="home-button">Home</a>`;
+        homeDiv.innerHTML = `<a href="home.html" class="home-button">Home</a>`;
         sidebar.appendChild(homeDiv);
     } catch (err) {
-        console.error("Error loading API data:", err);
-        document.getElementById("content").innerHTML = "<h1>⚠️ Failed to load API data</h1>";
+        document.getElementById("content").innerHTML = "<h1>⚠️ Backend API failed to load.</h1>";
     }
 }
 
 init();
 
 function makeSidebarResizable() {
-    const sidebar = document.querySelector(".sidebar");
+    const sidebar = document.querySelector(".sidebar") || document.getElementById("sidebar");
     if (!sidebar) return;
+    // disable on mobile
+    if (window.innerWidth <= 768) return;
+
+    // avoid double-initializing
+    if (sidebar.dataset.resizerInit === "1") return;
+    sidebar.dataset.resizerInit = "1";
 
     const resizer = document.createElement("div");
     resizer.className = "sidebar-resizer";
@@ -53,10 +58,7 @@ function makeSidebarResizable() {
         let newWidth = startWidth + dx;
         const minWidth = 150;
         const maxWidth = 600;
-
-        if (newWidth < minWidth) newWidth = minWidth;
-        if (newWidth > maxWidth) newWidth = maxWidth;
-
+        newWidth = Math.max(minWidth, Math.min(maxWidth, newWidth));
         sidebar.style.width = `${newWidth}px`;
     });
 
@@ -66,31 +68,11 @@ function makeSidebarResizable() {
         document.body.style.userSelect = "";
         document.body.style.cursor = "";
     });
-
-    // optional: basic touch support
-    resizer.addEventListener("touchstart", (e) => {
-        e.preventDefault();
-        isResizing = true;
-        startX = e.touches[0].clientX;
-        startWidth = sidebar.getBoundingClientRect().width;
-        document.body.style.userSelect = "none";
-    }, { passive: false });
-
-    document.addEventListener("touchmove", (e) => {
-        if (!isResizing) return;
-        const dx = e.touches[0].clientX - startX;
-        let newWidth = startWidth + dx;
-        newWidth = Math.max(150, Math.min(600, newWidth));
-        sidebar.style.width = `${newWidth}px`;
-    }, { passive: false });
-
-    document.addEventListener("touchend", () => {
-        isResizing = false;
-        document.body.style.userSelect = "";
-    });
 }
-
 makeSidebarResizable();
+window.addEventListener("resize", () => {
+    if (window.innerWidth > 768) makeSidebarResizable();
+});
 
 let folderHistory = [];
 
@@ -658,17 +640,114 @@ document.getElementById("searchFilter").addEventListener("change", () => {
     displaySearchResults(results);
 });
 
-const sidebar = document.getElementById("sidebar");
+// ===== Mobile sidebar toggle (v3) =====
+document.addEventListener("DOMContentLoaded", () => {
+    const sidebarEl = document.querySelector(".sidebar") || document.getElementById("sidebar");
+    const contentEl = document.getElementById("content");
+    const searchContainer = document.querySelector(".search-container");
+    if (!sidebarEl || !contentEl || !searchContainer) return;
 
-const scrollContainer = document.createElement("div");
-scrollContainer.className = "scrollable-content";
-sidebar.appendChild(scrollContainer);
+    // Default landing content if nothing selected
+    if (!contentEl.innerHTML.trim()) {
+        contentEl.innerHTML = "<h1>API Documentation Home</h1>";
+    }
 
-renderSidebar(apiData.data, scrollContainer);
+    // Toggle button inside search bar
+    const menuBtn = document.createElement("button");
+    menuBtn.className = "menu-toggle";
+    menuBtn.type = "button";
+    menuBtn.textContent = "☰";
+    searchContainer.insertBefore(menuBtn, searchContainer.firstChild);
 
-const homeDiv = document.createElement("div");
-homeDiv.id = "sidebar-home";
-homeDiv.innerHTML = `
-  <a href="home.html" class="home-button">Home</a>
-`;
-sidebar.appendChild(homeDiv);
+    // Backdrop
+    const backdrop = document.createElement("div");
+    backdrop.className = "mobile-backdrop";
+    document.body.appendChild(backdrop);
+
+    function openSidebar() {
+        sidebarEl.classList.add("open");
+        backdrop.classList.add("show");
+        document.body.style.overflow = "hidden";
+    }
+
+    function closeSidebar() {
+        sidebarEl.classList.remove("open");
+        backdrop.classList.remove("show");
+        document.body.style.overflow = "";
+    }
+
+    function isMobile() { return window.innerWidth <= 768; }
+
+    // Open/close handlers
+    menuBtn.addEventListener("click", () => {
+        if (sidebarEl.classList.contains("open")) {
+            closeSidebar();
+        } else {
+            openSidebar();
+        }
+    });
+
+    backdrop.addEventListener("click", closeSidebar);
+
+    // Close when navigating in sidebar on mobile
+    document.addEventListener("click", (e) => {
+        const t = e.target;
+        if (!isMobile()) return;
+        if (t.closest(".category-header") || t.closest("li[data-type='file']") || t.closest("a.linked-jump") || t.closest(".folder-item")) {
+            setTimeout(closeSidebar, 50);
+        }
+    });
+
+    // Keep state sane on resize
+    window.addEventListener("resize", () => {
+        if (!isMobile()) {
+            closeSidebar();
+        }
+    });
+});
+
+// Backdrop
+const backdrop = document.createElement("div");
+backdrop.className = "mobile-backdrop";
+document.body.appendChild(backdrop);
+
+function openSidebar() {
+    sidebarEl.classList.add("open");
+    backdrop.classList.add("show");
+    document.body.style.overflow = "hidden";
+}
+
+function closeSidebar() {
+    sidebarEl.classList.remove("open");
+    backdrop.classList.remove("show");
+    document.body.style.overflow = "";
+}
+
+function isMobile() { return window.innerWidth <= 768; }
+
+// Open/close handlers
+menuBtn.addEventListener("click", () => {
+    if (sidebarEl.classList.contains("open")) {
+        closeSidebar();
+    } else {
+        openSidebar();
+    }
+});
+
+backdrop.addEventListener("click", closeSidebar);
+
+// Close when navigating in sidebar on mobile
+document.addEventListener("click", (e) => {
+    const t = e.target;
+    if (!isMobile()) return;
+    if (t.closest(".category-header") || t.closest("li[data-type='file']") || t.closest("a.linked-jump") || t.closest(".folder-item")) {
+        setTimeout(closeSidebar, 50);
+    }
+});
+
+// Keep state sane on resize
+window.addEventListener("resize", () => {
+    if (!isMobile()) {
+        closeSidebar();
+    }
+});
