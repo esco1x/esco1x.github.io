@@ -141,7 +141,7 @@
 <script>
 async function fetchLeaderboard() {
     try {
-        const res = await fetch('http://api.eggrial.net/api/leaderboard');
+        const res = await fetch('http://api.eggrial.lol/api/leaderboard');
         const data = await res.json();
 
         const container = document.getElementById('leaderboard');
