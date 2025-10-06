@@ -1,156 +1,199 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lunar Weekly Leaderboard</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-<style>
-    body {
-        margin: 0;
-        font-family: 'Poppins', sans-serif;
-        background-color: #1e1e2a;
-        color: #ffffff;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        padding: 2rem;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lunar Weekly Leaderboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background-color: #1e1e2a;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+        }
 
-    h1 {
-        font-weight: 700;
-        font-size: 2.5rem;
-        margin-bottom: 1.5rem;
-        color: #ffca28; /* Fortnite-inspired accent */
-    }
+        h1 {
+            font-weight: 700;
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            color: #ffca28;
+            /* Fortnite-inspired accent */
+        }
 
-    .leaderboard {
-        width: 100%;
-        max-width: 600px;
-        background-color: #2c2c3c;
-        border-radius: 15px;
-        overflow: hidden;
-        box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-    }
+        .leaderboard {
+            width: 100%;
+            max-width: 600px;
+            background-color: #2c2c3c;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
 
-    .leaderboard-header, .leaderboard-row {
-        display: grid;
-        grid-template-columns: 60px 1fr 60px;
-        align-items: center;
-        padding: 0.8rem 1rem;
-    }
+        .leaderboard-header,
+        .leaderboard-row {
+            display: grid;
+            grid-template-columns: 60px 1fr 60px;
+            align-items: center;
+            padding: 0.8rem 1rem;
+        }
 
-    .leaderboard-header {
-        background-color: #3a3a50;
-        font-weight: 600;
-        font-size: 1rem;
-        text-transform: uppercase;
-        letter-spacing: 0.5px;
-        border-bottom: 1px solid #44445a;
-    }
+        .leaderboard-header {
+            background-color: #3a3a50;
+            font-weight: 600;
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid #44445a;
+        }
 
-    .leaderboard-row {
-        background-color: #2c2c3c;
-        border-bottom: 1px solid #3a3a50;
-        transition: background 0.2s;
-    }
+        .leaderboard-row {
+            background-color: #2c2c3c;
+            border-bottom: 1px solid #3a3a50;
+            transition: background 0.2s;
+        }
 
-    .leaderboard-row:last-child {
-        border-bottom: none;
-    }
+        .leaderboard-row:last-child {
+            border-bottom: none;
+        }
 
-    .leaderboard-row:hover {
-        background-color: #38384e;
-    }
+        .leaderboard-row:hover {
+            background-color: #38384e;
+        }
 
-    .rank {
-        font-weight: 700;
-        font-size: 1rem;
-        text-align: center;
-        color: #ffca28;
-    }
+        .rank {
+            font-weight: 700;
+            font-size: 1rem;
+            text-align: center;
+            color: #ffca28;
+        }
 
-    .user {
-        display: flex;
-        align-items: center;
-        gap: 0.8rem;
-    }
-
-    .user img {
-        width: 45px;
-        height: 45px;
-        border-radius: 50%;
-        border: 2px solid #ffca28;
-        object-fit: cover;
-    }
-
-    .username {
-        font-weight: 600;
-        font-size: 1rem;
-        color: #ffffff;
-    }
-
-    .messageCount {
-        font-weight: 700;
-        font-size: 1rem;
-        text-align: center;
-        color: #ffca28;
-    }
-
-    footer {
-        margin-top: 2rem;
-        font-size: 0.9rem;
-        color: #aaaaaa;
-    }
-
-    @media (max-width: 500px) {
-        .leaderboard-header, .leaderboard-row {
-            grid-template-columns: 40px 1fr 40px;
-            padding: 0.6rem 0.8rem;
+        .user {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
         }
 
         .user img {
-            width: 35px;
-            height: 35px;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            border: 2px solid #ffca28;
+            object-fit: cover;
         }
 
         .username {
-            font-size: 0.9rem;
+            font-weight: 600;
+            font-size: 1rem;
+            color: #ffffff;
         }
 
-        .rank, .messageCount {
-            font-size: 0.9rem;
+        .messageCount {
+            font-weight: 700;
+            font-size: 1rem;
+            text-align: center;
+            color: #ffca28;
         }
-    }
-</style>
+
+        footer {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: #aaaaaa;
+        }
+
+        @media (max-width: 500px) {
+
+            .leaderboard-header,
+            .leaderboard-row {
+                grid-template-columns: 40px 1fr 40px;
+                padding: 0.6rem 0.8rem;
+            }
+
+            .user img {
+                width: 35px;
+                height: 35px;
+            }
+
+            .username {
+                font-size: 0.9rem;
+            }
+
+            .rank,
+            .messageCount {
+                font-size: 0.9rem;
+            }
+        }
+
+        .loading {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1.5rem;
+            font-size: 1rem;
+            color: #ffca28;
+            gap: 0.5rem;
+        }
+
+        .spinner {
+            border: 3px solid rgba(255, 202, 40, 0.3);
+            border-top: 3px solid #ffca28;
+            border-radius: 50%;
+            width: 18px;
+            height: 18px;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
 </head>
+
 <body>
 
-<h1>Lunar Weekly Message Board</h1>
+    <h1>Lunar Weekly Message Board</h1>
 
-<div class="leaderboard" id="leaderboard">
-    <div class="leaderboard-header">
-        <div class="rank">#</div>
-        <div class="user">User</div>
-        <div class="messageCount">Msgs</div>
+    <div class="leaderboard" id="leaderboard">
+        <div class="leaderboard-header">
+            <div class="rank">#</div>
+            <div class="user">User</div>
+            <div class="messageCount">Msgs</div>
+        </div>
+        <div id="loading" class="loading">
+            <div class="spinner"></div> Loading leaderboard...
+        </div>
     </div>
-</div>
 
-<footer>Powered by Lunar Community</footer>
+    <footer>Powered by Lunar Community</footer>
 
-<script>
-async function fetchLeaderboard() {
-    try {
-        const res = await fetch('https://api.eggrial.lol/api/leaderboard');
-        const data = await res.json();
+    <script>
+        async function fetchLeaderboard() {
+            const container = document.getElementById('leaderboard');
+            const loading = document.getElementById('loading');
 
-        const container = document.getElementById('leaderboard');
+            try {
+                const res = await fetch('https://api.eggrial.lol/api/leaderboard');
+                const data = await res.json();
 
-        data.leaderboard.forEach(entry => {
-            const row = document.createElement('div');
-            row.className = 'leaderboard-row';
+                // Remove loading spinner
+                loading.style.display = 'none';
 
-            row.innerHTML = `
+                data.leaderboard.forEach(entry => {
+                    const row = document.createElement('div');
+                    row.className = 'leaderboard-row';
+
+                    row.innerHTML = `
                 <div class="rank">${entry.rank}</div>
                 <div class="user">
                     <img src="${entry.avatarURL}" alt="${entry.displayName}">
@@ -159,15 +202,17 @@ async function fetchLeaderboard() {
                 <div class="messageCount">${entry.messageCount}</div>
             `;
 
-            container.appendChild(row);
-        });
-    } catch (err) {
-        console.error("Failed to fetch leaderboard:", err);
-    }
-}
+                    container.appendChild(row);
+                });
+            } catch (err) {
+                console.error("Failed to fetch leaderboard:", err);
+                loading.innerText = "Failed to load leaderboard.";
+            }
+        }
 
-fetchLeaderboard();
-</script>
+        fetchLeaderboard();
+    </script>
 
 </body>
+
 </html>
