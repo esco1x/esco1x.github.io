@@ -2,279 +2,294 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lunar Weekly Emote Leaderboard</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Poppins', sans-serif;
-            background: radial-gradient(circle at top, #0f0f0f 0%, #050505 100%);
-            color: #e6e6e6;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            padding: 3rem 1rem;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lunar Weekly Emote Leaderboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: radial-gradient(circle at top, #0f0f0f 0%, #050505 100%);
+      color: #e6e6e6;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 3rem 1rem;
+    }
 
-        h1 {
-            font-weight: 700;
-            font-size: 2.8rem;
-            color: #ff4655;
-            margin-bottom: 0.5rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            text-shadow: 0 0 15px rgba(255, 70, 85, 0.4);
-        }
+    h1 {
+      font-weight: 700;
+      font-size: 2.8rem;
+      color: #ff4655;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      text-shadow: 0 0 15px rgba(255, 70, 85, 0.4);
+    }
 
-        h2 {
-            font-weight: 400;
-            font-size: 1rem;
-            color: #aaa;
-            margin-bottom: 2rem;
-            letter-spacing: 0.5px;
-        }
+    h2 {
+      font-weight: 400;
+      font-size: 1rem;
+      color: #aaa;
+      margin-bottom: 2rem;
+      letter-spacing: 0.5px;
+    }
 
-        .leaderboard {
-            width: 100%;
-            max-width: 700px;
-            background: rgba(20, 20, 20, 0.85);
-            border: 1px solid rgba(255, 70, 85, 0.2);
-            border-radius: 15px;
-            box-shadow: 0 0 25px rgba(255, 70, 85, 0.05);
-            overflow: hidden;
-            animation: fadeIn 0.6s ease forwards;
-        }
+    .leaderboard {
+      width: 100%;
+      max-width: 700px;
+      background: rgba(20, 20, 20, 0.85);
+      border: 1px solid rgba(255, 70, 85, 0.2);
+      border-radius: 15px;
+      box-shadow: 0 0 25px rgba(255, 70, 85, 0.05);
+      overflow: hidden;
+      animation: fadeIn 0.6s ease forwards;
+    }
 
-        .leaderboard-header,
-        .leaderboard-row {
-            display: grid;
-            grid-template-columns: 60px 1fr 70px;
-            align-items: center;
-            padding: 1rem 1.5rem;
-        }
+    .leaderboard-header,
+    .leaderboard-row {
+      display: grid;
+      grid-template-columns: 60px 1fr 70px;
+      align-items: center;
+      padding: 1rem 1.5rem;
+    }
 
-        .leaderboard-header {
-            background: rgba(255, 70, 85, 0.15);
-            color: #ff4655;
-            text-transform: uppercase;
-            font-weight: 600;
-            font-size: 0.9rem;
-            border-bottom: 1px solid rgba(255, 70, 85, 0.2);
-            letter-spacing: 0.8px;
-        }
+    .leaderboard-header {
+      background: rgba(255, 70, 85, 0.15);
+      color: #ff4655;
+      text-transform: uppercase;
+      font-weight: 600;
+      font-size: 0.9rem;
+      border-bottom: 1px solid rgba(255, 70, 85, 0.2);
+      letter-spacing: 0.8px;
+    }
 
-        .leaderboard-row {
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            background: rgba(25, 25, 25, 0.8);
-            transition: background 0.2s, transform 0.2s;
-        }
+    .leaderboard-row {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      background: rgba(25, 25, 25, 0.8);
+      transition: background 0.2s, transform 0.2s;
+    }
 
-        .leaderboard-row:hover {
-            background: rgba(255, 70, 85, 0.1);
-            transform: translateY(-2px);
-        }
+    .leaderboard-row:hover {
+      background: rgba(255, 70, 85, 0.1);
+      transform: translateY(-2px);
+    }
 
-        .rank {
-            text-align: center;
-            font-weight: 700;
-            font-size: 1.1rem;
-            color: #ff4655;
-        }
+    .rank {
+      text-align: center;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #ff4655;
+    }
 
-        .user {
-            display: flex;
-            align-items: center;
-            gap: 0.9rem;
-            padding: 0.5rem 0.8rem;
-            border-radius: 10px;
-        }
+    .user {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      padding: 0.5rem 0.8rem;
+      border-radius: 10px;
+    }
 
-        .emote-img {
-            width: 48px;
-            height: 48px;
-            object-fit: contain;
-            border-radius: 8px;
-        }
+    .emoji-container {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-        .username {
-            font-weight: 600;
-            font-size: 1rem;
-            color: #fff;
-            transition: text-shadow 0.3s, color 0.3s;
-        }
+    .emote-img,
+    .emoji-span {
+      width: 48px;
+      height: 48px;
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      cursor: default;
+    }
 
-        /* ===== Glowing Usernames (Valorant Red Theme) ===== */
-        .first-place .username {
-            color: #ff4655;
-            text-shadow: 0 0 10px rgba(255, 70, 85, 0.9), 0 0 20px rgba(255, 70, 85, 0.6);
-            animation: pulseRed 1.8s infinite alternate;
-        }
+    /* Tooltip styling */
+    .tooltip {
+      position: absolute;
+      bottom: 110%;
+      left: 50%;
+      transform: translateX(-50%) translateY(-6px);
+      background: rgba(15, 15, 15, 0.95);
+      color: #ff4655;
+      font-size: 0.8rem;
+      padding: 5px 10px;
+      border-radius: 6px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      border: 1px solid rgba(255, 70, 85, 0.4);
+      box-shadow: 0 0 10px rgba(255, 70, 85, 0.3);
+      text-shadow: 0 0 6px rgba(255, 70, 85, 0.6);
+    }
 
-        .second-place .username {
-            color: #ff6b73;
-            text-shadow: 0 0 8px rgba(255, 107, 115, 0.8), 0 0 16px rgba(255, 107, 115, 0.5);
-            animation: pulseRed 2s infinite alternate;
-        }
+    .tooltip::after {
+      content: "";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 5px;
+      border-style: solid;
+      border-color: rgba(15, 15, 15, 0.95) transparent transparent transparent;
+    }
 
-        .third-place .username {
-            color: #ff8a8f;
-            text-shadow: 0 0 6px rgba(255, 138, 143, 0.7), 0 0 14px rgba(255, 138, 143, 0.4);
-            animation: pulseRed 2.2s infinite alternate;
-        }
+    .emoji-container:hover .tooltip {
+      opacity: 1;
+      transform: translateX(-50%) translateY(-10px);
+    }
 
-        .messageCount {
-            text-align: center;
-            font-weight: 700;
-            font-size: 1.1rem;
-            color: #ff4655;
-        }
+    .first-place .username {
+      color: #ff4655;
+      text-shadow: 0 0 10px rgba(255, 70, 85, 0.9), 0 0 20px rgba(255, 70, 85, 0.6);
+      animation: pulseRed 1.8s infinite alternate;
+    }
 
-        .loading {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 2rem;
-            font-size: 1rem;
-            color: #ff4655;
-            gap: 0.6rem;
-        }
+    .second-place .username {
+      color: #ff6b73;
+      text-shadow: 0 0 8px rgba(255, 107, 115, 0.8), 0 0 16px rgba(255, 107, 115, 0.5);
+      animation: pulseRed 2s infinite alternate;
+    }
 
-        .spinner {
-            border: 3px solid rgba(255, 70, 85, 0.3);
-            border-top: 3px solid #ff4655;
-            border-radius: 50%;
-            width: 20px;
-            height: 20px;
-            animation: spin 1s linear infinite;
-        }
+    .third-place .username {
+      color: #ff8a8f;
+      text-shadow: 0 0 6px rgba(255, 138, 143, 0.7), 0 0 14px rgba(255, 138, 143, 0.4);
+      animation: pulseRed 2.2s infinite alternate;
+    }
 
-        .emoji-span {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            width: 48px;
-            height: 48px;
-            font-size: 2rem;
-            /* adjust so emoji fills container */
-            border-radius: 8px;
-        }
+    .messageCount {
+      text-align: center;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #ff4655;
+    }
 
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
+    .loading {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+      font-size: 1rem;
+      color: #ff4655;
+      gap: 0.6rem;
+    }
 
-            100% {
-                transform: rotate(360deg);
-            }
-        }
+    .spinner {
+      border: 3px solid rgba(255, 70, 85, 0.3);
+      border-top: 3px solid #ff4655;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      animation: spin 1s linear infinite;
+    }
 
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(15px);
-            }
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
+      }
 
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
 
-        footer {
-            margin-top: 2rem;
-            font-size: 0.9rem;
-            color: #666;
-            letter-spacing: 0.3px;
-        }
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(15px);
+      }
 
-        @media (max-width: 500px) {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-            .leaderboard-header,
-            .leaderboard-row {
-                grid-template-columns: 40px 1fr 50px;
-                padding: 0.6rem 0.9rem;
-            }
-
-            .emote-img {
-                width: 38px;
-                height: 38px;
-            }
-
-            .username {
-                font-size: 0.9rem;
-            }
-
-            .rank,
-            .messageCount {
-                font-size: 0.9rem;
-            }
-        }
-    </style>
+    footer {
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      color: #666;
+      letter-spacing: 0.3px;
+    }
+  </style>
 </head>
 
 <body>
 
-    <h1>Lunar Leaderboard</h1>
-    <h2>Weekly Emote Rankings</h2>
+  <h1>Lunar Leaderboard</h1>
+  <h2>Weekly Emote Rankings</h2>
 
-    <div class="leaderboard" id="leaderboard">
-        <div class="leaderboard-header">
-            <div class="rank">#</div>
-            <div class="user">Emote</div>
-            <div class="messageCount">Uses</div>
-        </div>
-        <div id="loading" class="loading">
-            <div class="spinner"></div> Loading leaderboard...
-        </div>
+  <div class="leaderboard" id="leaderboard">
+    <div class="leaderboard-header">
+      <div class="rank">#</div>
+      <div class="user">Emote</div>
+      <div class="messageCount">Uses</div>
     </div>
+    <div id="loading" class="loading">
+      <div class="spinner"></div> Loading leaderboard...
+    </div>
+  </div>
 
-    <footer>Powered by eggrial.lol</footer>
+  <footer>Powered by eggrial.lol</footer>
 
-    <script>
-        async function fetchLeaderboard() {
-            const container = document.getElementById('leaderboard');
-            const loading = document.getElementById('loading');
+  <script>
+    async function fetchLeaderboard() {
+      const container = document.getElementById('leaderboard');
+      const loading = document.getElementById('loading');
 
-            try {
-                const res = await fetch('https://api.eggrial.lol/api/leaderboard/emotes');
-                const data = await res.json();
-                loading.style.display = 'none';
+      try {
+        const res = await fetch('https://api.eggrial.lol/api/leaderboard/emotes');
+        const data = await res.json();
+        loading.style.display = 'none';
 
-                data.leaderboard.forEach(entry => {
-                    const row = document.createElement('div');
-                    row.className = 'leaderboard-row';
+        data.leaderboard.forEach(entry => {
+          const row = document.createElement('div');
+          row.className = 'leaderboard-row';
 
-                    let placeClass = '';
-                    if (entry.rank === 1) placeClass = 'first-place';
-                    else if (entry.rank === 2) placeClass = 'second-place';
-                    else if (entry.rank === 3) placeClass = 'third-place';
+          let placeClass = '';
+          if (entry.rank === 1) placeClass = 'first-place';
+          else if (entry.rank === 2) placeClass = 'second-place';
+          else if (entry.rank === 3) placeClass = 'third-place';
 
-                    let emoteContent = '';
-                    if (entry.isCustom) {
-                        emoteContent = `<img src="${entry.emote}" alt="${entry.name}" class="emote-img">`;
-                    } else {
-                        emoteContent = `<span class="emoji-span">${entry.name}</span>`;
-                    }
+          let emoteContent = '';
+          if (entry.isCustom) {
+            emoteContent = `
+              <div class="emoji-container">
+                <img src="${entry.emote}" alt="${entry.name}" class="emote-img">
+                <div class="tooltip">${entry.name}</div>
+              </div>
+            `;
+          } else {
+            emoteContent = `
+              <div class="emoji-container">
+                <span class="emoji-span">${entry.name}</span>
+                <div class="tooltip">${entry.name}</div>
+              </div>
+            `;
+          }
 
-                    row.innerHTML = `
+          row.innerHTML = `
             <div class="rank">${entry.rank}</div>
             <div class="user ${placeClass}">${emoteContent}</div>
             <div class="messageCount">${entry.count}</div>
           `;
-                    container.appendChild(row);
-                });
-            } catch (err) {
-                console.error("Failed to fetch leaderboard:", err);
-                loading.innerText = "Failed to load leaderboard.";
-            }
-        }
+          container.appendChild(row);
+        });
+      } catch (err) {
+        console.error("Failed to fetch leaderboard:", err);
+        loading.innerText = "Failed to load leaderboard.";
+      }
+    }
 
-        fetchLeaderboard();
-    </script>
+    fetchLeaderboard();
+  </script>
 </body>
-
 </html>
