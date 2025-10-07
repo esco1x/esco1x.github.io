@@ -10,8 +10,8 @@
     body {
       margin: 0;
       font-family: 'Poppins', sans-serif;
-      background: radial-gradient(circle at top, #252542 0%, #161620 100%);
-      color: #fff;
+      background: radial-gradient(circle at top, #0f0f0f 0%, #050505 100%);
+      color: #e6e6e6;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -22,29 +22,30 @@
     h1 {
       font-weight: 700;
       font-size: 2.8rem;
-      color: #ffca28;
-      margin-bottom: 1rem;
-      text-shadow: 0 0 15px rgba(255, 202, 40, 0.4);
+      color: #ff4655;
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      text-shadow: 0 0 15px rgba(255, 70, 85, 0.4);
     }
 
     h2 {
       font-weight: 400;
       font-size: 1rem;
-      color: #bfbfbf;
+      color: #aaa;
       margin-bottom: 2rem;
       letter-spacing: 0.5px;
     }
 
-    /* ===== Leaderboard Card ===== */
+    /* ===== Leaderboard Container ===== */
     .leaderboard {
       width: 100%;
       max-width: 700px;
-      backdrop-filter: blur(15px);
-      background: rgba(44, 44, 60, 0.6);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 18px;
+      background: rgba(20, 20, 20, 0.85);
+      border: 1px solid rgba(255, 70, 85, 0.2);
+      border-radius: 15px;
+      box-shadow: 0 0 25px rgba(255, 70, 85, 0.05);
       overflow: hidden;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
       animation: fadeIn 0.6s ease forwards;
     }
 
@@ -57,22 +58,23 @@
     }
 
     .leaderboard-header {
-      background: rgba(255, 255, 255, 0.05);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      font-weight: 600;
+      background: rgba(255, 70, 85, 0.15);
+      color: #ff4655;
       text-transform: uppercase;
-      letter-spacing: 0.6px;
-      color: #ccc;
+      font-weight: 600;
       font-size: 0.9rem;
+      border-bottom: 1px solid rgba(255, 70, 85, 0.2);
+      letter-spacing: 0.8px;
     }
 
     .leaderboard-row {
       border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      background: rgba(25, 25, 25, 0.8);
       transition: background 0.2s, transform 0.2s;
     }
 
     .leaderboard-row:hover {
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(255, 70, 85, 0.1);
       transform: translateY(-2px);
     }
 
@@ -80,7 +82,7 @@
       text-align: center;
       font-weight: 700;
       font-size: 1.1rem;
-      color: #ffca28;
+      color: #ff4655;
     }
 
     .user {
@@ -89,15 +91,14 @@
       gap: 0.9rem;
       padding: 0.5rem 0.8rem;
       border-radius: 10px;
-      transition: box-shadow 0.3s;
     }
 
     .user img {
       width: 48px;
       height: 48px;
       border-radius: 50%;
+      border: 2px solid rgba(255, 70, 85, 0.5);
       object-fit: cover;
-      border: 2px solid rgba(255, 255, 255, 0.15);
     }
 
     .username {
@@ -107,43 +108,35 @@
       transition: text-shadow 0.3s, color 0.3s;
     }
 
-    /* ===== Glowing Usernames ===== */
+    /* ===== Glowing Usernames (Valorant Red Theme) ===== */
     .first-place .username {
-      color: #ffcc33;
-      text-shadow: 0 0 8px rgba(255, 204, 51, 0.8), 0 0 15px rgba(255, 204, 51, 0.5);
-      animation: pulseGold 2s infinite alternate;
+      color: #ff4655;
+      text-shadow: 0 0 10px rgba(255, 70, 85, 0.9), 0 0 20px rgba(255, 70, 85, 0.6);
+      animation: pulseRed 1.8s infinite alternate;
     }
 
     .second-place .username {
-      color: #d9d9d9;
-      text-shadow: 0 0 8px rgba(217, 217, 217, 0.8), 0 0 15px rgba(217, 217, 217, 0.5);
-      animation: pulseSilver 2s infinite alternate;
+      color: #ff6b73;
+      text-shadow: 0 0 8px rgba(255, 107, 115, 0.8), 0 0 16px rgba(255, 107, 115, 0.5);
+      animation: pulseRed 2s infinite alternate;
     }
 
     .third-place .username {
-      color: #d38b52;
-      text-shadow: 0 0 8px rgba(211, 139, 82, 0.8), 0 0 15px rgba(211, 139, 82, 0.5);
-      animation: pulseBronze 2s infinite alternate;
+      color: #ff8a8f;
+      text-shadow: 0 0 6px rgba(255, 138, 143, 0.7), 0 0 14px rgba(255, 138, 143, 0.4);
+      animation: pulseRed 2.2s infinite alternate;
     }
 
-    @keyframes pulseGold {
-      from { text-shadow: 0 0 8px rgba(255, 204, 51, 0.5); }
-      to { text-shadow: 0 0 18px rgba(255, 204, 51, 0.9); }
-    }
-    @keyframes pulseSilver {
-      from { text-shadow: 0 0 8px rgba(217, 217, 217, 0.5); }
-      to { text-shadow: 0 0 18px rgba(217, 217, 217, 0.9); }
-    }
-    @keyframes pulseBronze {
-      from { text-shadow: 0 0 8px rgba(211, 139, 82, 0.5); }
-      to { text-shadow: 0 0 18px rgba(211, 139, 82, 0.9); }
+    @keyframes pulseRed {
+      from { text-shadow: 0 0 8px rgba(255, 70, 85, 0.4); }
+      to { text-shadow: 0 0 20px rgba(255, 70, 85, 1); }
     }
 
     .messageCount {
       text-align: center;
       font-weight: 700;
-      color: #ffca28;
       font-size: 1.1rem;
+      color: #ff4655;
     }
 
     /* ===== Loading ===== */
@@ -153,13 +146,13 @@
       align-items: center;
       padding: 2rem;
       font-size: 1rem;
-      color: #ffca28;
+      color: #ff4655;
       gap: 0.6rem;
     }
 
     .spinner {
-      border: 3px solid rgba(255, 202, 40, 0.3);
-      border-top: 3px solid #ffca28;
+      border: 3px solid rgba(255, 70, 85, 0.3);
+      border-top: 3px solid #ff4655;
       border-radius: 50%;
       width: 20px;
       height: 20px;
@@ -179,7 +172,7 @@
     footer {
       margin-top: 2rem;
       font-size: 0.9rem;
-      color: #8e8e8e;
+      color: #666;
       letter-spacing: 0.3px;
     }
 
@@ -210,7 +203,7 @@
     </div>
   </div>
 
-  <footer>Powered by eggrial.lol</footer>
+  <footer>Powered by Lunar Community</footer>
 
   <script>
     async function fetchLeaderboard() {
