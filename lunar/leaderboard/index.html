@@ -1,218 +1,252 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lunar Weekly Leaderboard</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Poppins', sans-serif;
-            background-color: #1e1e2a;
-            color: #ffffff;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding: 2rem;
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lunar Weekly Leaderboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* ===== Base Page ===== */
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: radial-gradient(circle at top, #252542 0%, #161620 100%);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+      padding: 3rem 1rem;
+    }
 
-        h1 {
-            font-weight: 700;
-            font-size: 2.5rem;
-            margin-bottom: 1.5rem;
-            color: #ffca28;
-            /* Fortnite-inspired accent */
-        }
+    h1 {
+      font-weight: 700;
+      font-size: 2.8rem;
+      color: #ffca28;
+      margin-bottom: 1rem;
+      text-shadow: 0 0 15px rgba(255, 202, 40, 0.4);
+    }
 
-        .leaderboard {
-            width: 100%;
-            max-width: 600px;
-            background-color: #2c2c3c;
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-        }
+    h2 {
+      font-weight: 400;
+      font-size: 1rem;
+      color: #bfbfbf;
+      margin-bottom: 2rem;
+      letter-spacing: 0.5px;
+    }
 
-        .leaderboard-header,
-        .leaderboard-row {
-            display: grid;
-            grid-template-columns: 60px 1fr 60px;
-            align-items: center;
-            padding: 0.8rem 1rem;
-        }
+    /* ===== Leaderboard Card ===== */
+    .leaderboard {
+      width: 100%;
+      max-width: 700px;
+      backdrop-filter: blur(15px);
+      background: rgba(44, 44, 60, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+      animation: fadeIn 0.6s ease forwards;
+    }
 
-        .leaderboard-header {
-            background-color: #3a3a50;
-            font-weight: 600;
-            font-size: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            border-bottom: 1px solid #44445a;
-        }
+    .leaderboard-header,
+    .leaderboard-row {
+      display: grid;
+      grid-template-columns: 60px 1fr 70px;
+      align-items: center;
+      padding: 1rem 1.5rem;
+    }
 
-        .leaderboard-row {
-            background-color: #2c2c3c;
-            border-bottom: 1px solid #3a3a50;
-            transition: background 0.2s;
-        }
+    .leaderboard-header {
+      background: rgba(255, 255, 255, 0.05);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.6px;
+      color: #ccc;
+      font-size: 0.9rem;
+    }
 
-        .leaderboard-row:last-child {
-            border-bottom: none;
-        }
+    .leaderboard-row {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      transition: background 0.2s, transform 0.2s;
+    }
 
-        .leaderboard-row:hover {
-            background-color: #38384e;
-        }
+    .leaderboard-row:hover {
+      background: rgba(255, 255, 255, 0.05);
+      transform: translateY(-2px);
+    }
 
-        .rank {
-            font-weight: 700;
-            font-size: 1rem;
-            text-align: center;
-            color: #ffca28;
-        }
+    .rank {
+      text-align: center;
+      font-weight: 700;
+      font-size: 1.1rem;
+      color: #ffca28;
+    }
 
-        .user {
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-        }
+    .user {
+      display: flex;
+      align-items: center;
+      gap: 0.9rem;
+      padding: 0.5rem 0.8rem;
+      border-radius: 10px;
+      transition: box-shadow 0.3s;
+    }
 
-        .user img {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            border: 2px solid #ffca28;
-            object-fit: cover;
-        }
+    .user img {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid rgba(255, 255, 255, 0.15);
+    }
 
-        .username {
-            font-weight: 600;
-            font-size: 1rem;
-            color: #ffffff;
-        }
+    .username {
+      font-weight: 600;
+      font-size: 1rem;
+      color: #fff;
+      transition: text-shadow 0.3s, color 0.3s;
+    }
 
-        .messageCount {
-            font-weight: 700;
-            font-size: 1rem;
-            text-align: center;
-            color: #ffca28;
-        }
+    /* ===== Glowing Usernames ===== */
+    .first-place .username {
+      color: #ffcc33;
+      text-shadow: 0 0 8px rgba(255, 204, 51, 0.8), 0 0 15px rgba(255, 204, 51, 0.5);
+      animation: pulseGold 2s infinite alternate;
+    }
 
-        footer {
-            margin-top: 2rem;
-            font-size: 0.9rem;
-            color: #aaaaaa;
-        }
+    .second-place .username {
+      color: #d9d9d9;
+      text-shadow: 0 0 8px rgba(217, 217, 217, 0.8), 0 0 15px rgba(217, 217, 217, 0.5);
+      animation: pulseSilver 2s infinite alternate;
+    }
 
-        @media (max-width: 500px) {
+    .third-place .username {
+      color: #d38b52;
+      text-shadow: 0 0 8px rgba(211, 139, 82, 0.8), 0 0 15px rgba(211, 139, 82, 0.5);
+      animation: pulseBronze 2s infinite alternate;
+    }
 
-            .leaderboard-header,
-            .leaderboard-row {
-                grid-template-columns: 40px 1fr 40px;
-                padding: 0.6rem 0.8rem;
-            }
+    @keyframes pulseGold {
+      from { text-shadow: 0 0 8px rgba(255, 204, 51, 0.5); }
+      to { text-shadow: 0 0 18px rgba(255, 204, 51, 0.9); }
+    }
+    @keyframes pulseSilver {
+      from { text-shadow: 0 0 8px rgba(217, 217, 217, 0.5); }
+      to { text-shadow: 0 0 18px rgba(217, 217, 217, 0.9); }
+    }
+    @keyframes pulseBronze {
+      from { text-shadow: 0 0 8px rgba(211, 139, 82, 0.5); }
+      to { text-shadow: 0 0 18px rgba(211, 139, 82, 0.9); }
+    }
 
-            .user img {
-                width: 35px;
-                height: 35px;
-            }
+    .messageCount {
+      text-align: center;
+      font-weight: 700;
+      color: #ffca28;
+      font-size: 1.1rem;
+    }
 
-            .username {
-                font-size: 0.9rem;
-            }
+    /* ===== Loading ===== */
+    .loading {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+      font-size: 1rem;
+      color: #ffca28;
+      gap: 0.6rem;
+    }
 
-            .rank,
-            .messageCount {
-                font-size: 0.9rem;
-            }
-        }
+    .spinner {
+      border: 3px solid rgba(255, 202, 40, 0.3);
+      border-top: 3px solid #ffca28;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      animation: spin 1s linear infinite;
+    }
 
-        .loading {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 1.5rem;
-            font-size: 1rem;
-            color: #ffca28;
-            gap: 0.5rem;
-        }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
 
-        .spinner {
-            border: 3px solid rgba(255, 202, 40, 0.3);
-            border-top: 3px solid #ffca28;
-            border-radius: 50%;
-            width: 18px;
-            height: 18px;
-            animation: spin 1s linear infinite;
-        }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
 
-        @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
+    footer {
+      margin-top: 2rem;
+      font-size: 0.9rem;
+      color: #8e8e8e;
+      letter-spacing: 0.3px;
+    }
 
-            100% {
-                transform: rotate(360deg);
-            }
-        }
-    </style>
+    @media (max-width: 500px) {
+      .leaderboard-header, .leaderboard-row {
+        grid-template-columns: 40px 1fr 50px;
+        padding: 0.6rem 0.9rem;
+      }
+      .user img { width: 38px; height: 38px; }
+      .username { font-size: 0.9rem; }
+      .rank, .messageCount { font-size: 0.9rem; }
+    }
+  </style>
 </head>
-
 <body>
 
-    <h1>Lunar Weekly Message Board</h1>
+  <h1>Lunar Leaderboard</h1>
+  <h2>Weekly Message Rankings</h2>
 
-    <div class="leaderboard" id="leaderboard">
-        <div class="leaderboard-header">
-            <div class="rank">#</div>
-            <div class="user">User</div>
-            <div class="messageCount">Msgs</div>
-        </div>
-        <div id="loading" class="loading">
-            <div class="spinner"></div> Loading leaderboard...
-        </div>
+  <div class="leaderboard" id="leaderboard">
+    <div class="leaderboard-header">
+      <div class="rank">#</div>
+      <div class="user">User</div>
+      <div class="messageCount">Msgs</div>
     </div>
+    <div id="loading" class="loading">
+      <div class="spinner"></div> Loading leaderboard...
+    </div>
+  </div>
 
-    <footer>Powered by Lunar Community</footer>
+  <footer>Powered by eggrial.lol</footer>
 
-    <script>
-        async function fetchLeaderboard() {
-            const container = document.getElementById('leaderboard');
-            const loading = document.getElementById('loading');
+  <script>
+    async function fetchLeaderboard() {
+      const container = document.getElementById('leaderboard');
+      const loading = document.getElementById('loading');
 
-            try {
-                const res = await fetch('https://api.eggrial.lol/api/leaderboard');
-                const data = await res.json();
+      try {
+        const res = await fetch('https://api.eggrial.lol/api/leaderboard');
+        const data = await res.json();
+        loading.style.display = 'none';
 
-                // Remove loading spinner
-                loading.style.display = 'none';
+        data.leaderboard.forEach(entry => {
+          const row = document.createElement('div');
+          row.className = 'leaderboard-row';
 
-                data.leaderboard.forEach(entry => {
-                    const row = document.createElement('div');
-                    row.className = 'leaderboard-row';
+          let placeClass = '';
+          if (entry.rank === 1) placeClass = 'first-place';
+          else if (entry.rank === 2) placeClass = 'second-place';
+          else if (entry.rank === 3) placeClass = 'third-place';
 
-                    row.innerHTML = `
-                <div class="rank">${entry.rank}</div>
-                <div class="user">
-                    <img src="${entry.avatarURL}" alt="${entry.displayName}">
-                    <span class="username">${entry.displayName}</span>
-                </div>
-                <div class="messageCount">${entry.messageCount}</div>
-            `;
-
-                    container.appendChild(row);
-                });
-            } catch (err) {
-                console.error("Failed to fetch leaderboard:", err);
-                loading.innerText = "Failed to load leaderboard.";
-            }
-        }
-
-        fetchLeaderboard();
-    </script>
-
+          row.innerHTML = `
+            <div class="rank">${entry.rank}</div>
+            <div class="user ${placeClass}">
+              <img src="${entry.avatarURL}" alt="${entry.displayName}">
+              <span class="username">${entry.displayName}</span>
+            </div>
+            <div class="messageCount">${entry.messageCount}</div>
+          `;
+          container.appendChild(row);
+        });
+      } catch (err) {
+        console.error("Failed to fetch leaderboard:", err);
+        loading.innerText = "Failed to load leaderboard.";
+      }
+    }
+    fetchLeaderboard();
+  </script>
 </body>
-
 </html>
