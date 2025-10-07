@@ -211,7 +211,7 @@
       const loading = document.getElementById('loading');
 
       try {
-        const res = await fetch('https://api.eggrial.lol/api/leaderboard');
+        const res = await fetch('https://api.eggrial.lol/api/leaderboard/messages');
         const data = await res.json();
         loading.style.display = 'none';
 
