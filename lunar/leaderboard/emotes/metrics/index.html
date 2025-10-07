@@ -116,7 +116,7 @@ async function fetchEmoteMetrics() {
               itemDiv.append(authorLine, channelLine, contentLine, timestampLine);
             } else {
               Object.entries(item)
-                .filter(([k]) => !['_id','__v'].includes(k))
+                .filter(([k]) => !['_id','__v', 'emote' ].includes(k))
                 .forEach(([k,v]) => {
                   const line = document.createElement('div');
                   line.className = 'item-line';
@@ -131,7 +131,7 @@ async function fetchEmoteMetrics() {
         });
       } else if (typeof items === 'object') {
         Object.entries(items).forEach(([k,v]) => {
-          if (['_id','__v'].includes(k)) return;
+          if (['_id','__v', 'emote' ].includes(k)) return;
           const itemDiv = document.createElement('div');
           itemDiv.className = 'item';
           itemDiv.innerHTML = `<strong>${k}:</strong> ${v}`;
