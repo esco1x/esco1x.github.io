@@ -240,7 +240,7 @@
             const loading = document.getElementById('loading');
 
             try {
-                const res = await fetch('http://api.eggrial.lol/api/leaderboard/emotes');
+                const res = await fetch('https://api.eggrial.lol/api/leaderboard/emotes');
                 const data = await res.json();
                 loading.style.display = 'none';
 
