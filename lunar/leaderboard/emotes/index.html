@@ -70,6 +70,7 @@
       border-bottom: 1px solid rgba(255, 255, 255, 0.05);
       background: rgba(25, 25, 25, 0.8);
       transition: background 0.2s, transform 0.2s;
+      cursor: pointer;
     }
 
     .leaderboard-row:hover {
@@ -253,6 +254,7 @@
         data.leaderboard.forEach(entry => {
           const row = document.createElement('div');
           row.className = 'leaderboard-row';
+          row.onclick = () => window.location.href = `https://eggrial.lol/lunar/leaderboard/emotes/metrics?emojiId=${entry.id}`;
 
           let placeClass = '';
           if (entry.rank === 1) placeClass = 'first-place';
@@ -263,7 +265,7 @@
           if (entry.isCustom) {
             emoteContent = `
               <div class="emoji-container">
-                <img src="${entry.emote}" alt="${entry.name}" class="emote-img">
+                <img src="${entry.emoteUrl}" alt="${entry.name}" class="emote-img">
                 <div class="tooltip">${entry.name}</div>
               </div>
             `;
@@ -292,4 +294,5 @@
     fetchLeaderboard();
   </script>
 </body>
+
 </html>
