@@ -97,7 +97,7 @@ h2 {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 1rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .stat-card {
@@ -125,10 +125,22 @@ h2 {
   color: var(--text-muted);
 }
 
+.emote-warning {
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 1px solid var(--accent);
+  border-radius: 10px;
+  background: rgba(255,70,85,0.1);
+  color: var(--accent);
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
 .sections {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1.2rem;
+  margin-top: 1.5rem;
 }
 
 .section {
@@ -153,6 +165,7 @@ h2 {
   padding: 0.6rem 0.8rem;
   margin-bottom: 0.5rem;
   border-left: 3px solid var(--accent);
+  word-break: break-word;
 }
 
 .item-line {
@@ -200,32 +213,15 @@ footer {
   h1 { font-size: 2rem; }
   h2 { font-size: 0.95rem; }
 
-  .emote-header {
-    flex-direction: column;
-    text-align: center;
-    gap: 0.5rem;
-  }
-
+  .emote-header { flex-direction: column; text-align: center; gap: 0.5rem; }
   .emote-info h3 { font-size: 1.3rem; }
 
-  .stats-grid {
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 0.8rem;
-  }
-
+  .stats-grid { grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 0.8rem; }
   .sections { grid-template-columns: 1fr; gap: 1rem; }
 
   .item-line { flex-direction: column; align-items: flex-start; gap: 0.3rem; }
   .item { padding: 0.5rem 0.7rem; }
   .stat-card { padding: 1rem; }
-}
-
-@media (max-width: 480px) {
-  h1 { font-size: 1.6rem; }
-  h2 { font-size: 0.85rem; }
-  .emote-header img, .emote-header span { width: 50px; height: 50px; font-size: 2rem; }
-  .emote-info h3 { font-size: 1.1rem; }
-  .stats-grid { grid-template-columns: 1fr 1fr; }
 }
 </style>
 </head>
@@ -266,7 +262,7 @@ async function fetchEmoteMetrics() {
     loading.style.display = 'none';
     document.getElementById('emote-subtitle').innerText = `Metrics for "${emoteData.name}"`;
 
-    // Header
+    // Create header
     const header = document.createElement('div');
     header.className = 'emote-header';
     header.innerHTML = `
@@ -276,35 +272,43 @@ async function fetchEmoteMetrics() {
       </div>`;
     container.appendChild(header);
 
-    // Stat cards
+    // Safe defaults
+    emoteData.users = emoteData.users || [];
+    emoteData.channels = emoteData.channels || [];
+    emoteData.messages = emoteData.messages || [];
+
+    // Stats
+    const totalMessages = emoteData.messages.length;
+    const totalUserUses = emoteData.users.reduce((a, b) => a + (b.count || 0), 0);
+
     const stats = document.createElement('div');
     stats.className = 'stats-grid';
-    const totalUsers = (emoteData.users||[]).length;
-    const totalChannels = (emoteData.channels||[]).length;
-    const totalMessages = (emoteData.messages||[]).length;
-
     stats.innerHTML = `
       <div class="stat-card"><div class="stat-value">${emoteData.count || 0}</div><div class="stat-label">Total Uses</div></div>
-      <div class="stat-card"><div class="stat-value">${totalUsers}</div><div class="stat-label">Unique Users</div></div>
-      <div class="stat-card"><div class="stat-value">${totalChannels}</div><div class="stat-label">Channels Used</div></div>
-      <div class="stat-card"><div class="stat-value">${totalMessages}</div><div class="stat-label">Messages Counted</div></div>
-    `;
+      <div class="stat-card"><div class="stat-value">${emoteData.users.length}</div><div class="stat-label">Unique Users</div></div>
+      <div class="stat-card"><div class="stat-value">${emoteData.channels.length}</div><div class="stat-label">Channels Used</div></div>
+      <div class="stat-card"><div class="stat-value">${totalMessages}</div><div class="stat-label">Messages Counted</div></div>`;
     container.appendChild(stats);
 
-    // Warning if metrics are missing
-    if (totalUsers + totalChannels + totalMessages < emoteData.count) {
-      const warning = document.createElement('div');
-      warning.style.marginTop = '1rem';
-      warning.style.padding = '1rem';
-      warning.style.border = '1px solid var(--accent)';
-      warning.style.borderRadius = '10px';
-      warning.style.background = 'rgba(255,70,85,0.1)';
-      warning.style.color = 'var(--accent)';
-      warning.innerText = '⚠️ Metrics for this emote were added after the initial counter. To update metrics, send this emote again in chat.';
-      container.appendChild(warning);
+    // --- Warning system ---
+
+    // 1️⃣ If metrics are missing entirely
+    if (emoteData.users.length === 0 && emoteData.channels.length === 0 && emoteData.messages.length === 0 && emoteData.count > 0) {
+      const oldWarn = document.createElement('div');
+      oldWarn.className = 'emote-warning';
+      oldWarn.innerText = '⚠️ Metrics for this emote were added after the initial counter. Send this emote again to update metrics.';
+      container.appendChild(oldWarn);
     }
 
-    // Sections
+    // 2️⃣ If total uses don’t match the sum of user counts
+    if (totalUserUses !== emoteData.count) {
+      const mismatchWarn = document.createElement('div');
+      mismatchWarn.className = 'emote-warning';
+      mismatchWarn.innerText = `❗ The total emote uses (${emoteData.count}) don’t match the sum of user counts (${totalUserUses}). Some data may be outdated or inconsistent.`;
+      container.appendChild(mismatchWarn);
+    }
+
+    // --- Sections ---
     const sections = document.createElement('div');
     sections.className = 'sections';
 
@@ -321,16 +325,16 @@ async function fetchEmoteMetrics() {
         } else if (type === 'channel') {
           itemDiv.innerHTML = `<div class="item-line"><strong>#${i.name}</strong><span>${i.count} uses</span></div>`;
         } else if (type === 'message') {
-          itemDiv.innerHTML = `<div class="item-line"><strong>${i.authorTag}</strong><span>${new Date(i.timestamp).toLocaleString()}</span></div><div>${i.content}</div>`;
+          itemDiv.innerHTML = `<div class="item-line"><strong>${i.authorTag}</strong><span>${new Date(i.timestamp).toLocaleString()}</span></div><div>${i.content || 'No content'}</div>`;
         }
         section.appendChild(itemDiv);
       });
       return section;
     }
 
-    const topUsers = createSection('Top Users', (emoteData.users||[]).sort((a,b)=>b.count-a.count).slice(0,5), 'user');
-    const topChannels = createSection('Top Channels', (emoteData.channels||[]).sort((a,b)=>b.count-a.count).slice(0,5), 'channel');
-    const recentMessages = createSection('Recent Messages', (emoteData.messages||[]).sort((a,b)=>new Date(b.timestamp)-new Date(a.timestamp)).slice(0,5), 'message');
+    const topUsers = createSection('Top Users', emoteData.users.sort((a,b)=>b.count-a.count).slice(0,5), 'user');
+    const topChannels = createSection('Top Channels', emoteData.channels.sort((a,b)=>b.count-a.count).slice(0,5), 'channel');
+    const recentMessages = createSection('Recent Messages', emoteData.messages.sort((a,b)=>new Date(b.timestamp)-new Date(a.timestamp)).slice(0,5), 'message');
 
     [topUsers, topChannels, recentMessages].forEach(s => s && sections.appendChild(s));
     container.appendChild(sections);
