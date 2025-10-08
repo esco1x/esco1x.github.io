@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Lunar Emote Metrics</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
 :root {
   --accent: #ff4655;
@@ -127,13 +128,18 @@ h2 {
 
 .emote-warning {
   margin-top: 1rem;
-  padding: 1rem;
+  padding: 1rem 1.2rem;
   border: 1px solid var(--accent);
   border-radius: 10px;
   background: rgba(255,70,85,0.1);
   color: var(--accent);
   font-weight: 500;
   font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  box-shadow: 0 0 10px rgba(255,70,85,0.15);
+  animation: fadeIn 0.5s ease;
 }
 
 .sections {
@@ -262,7 +268,6 @@ async function fetchEmoteMetrics() {
     loading.style.display = 'none';
     document.getElementById('emote-subtitle').innerText = `Metrics for "${emoteData.name}"`;
 
-    // Header
     const header = document.createElement('div');
     header.className = 'emote-header';
     header.innerHTML = `
@@ -272,7 +277,6 @@ async function fetchEmoteMetrics() {
       </div>`;
     container.appendChild(header);
 
-    // Safe defaults
     emoteData.users = Array.isArray(emoteData.users) ? emoteData.users : [];
     emoteData.channels = Array.isArray(emoteData.channels) ? emoteData.channels : [];
     emoteData.messages = Array.isArray(emoteData.messages) ? emoteData.messages : [];
@@ -280,7 +284,6 @@ async function fetchEmoteMetrics() {
     const totalMessages = emoteData.messages.length;
     const totalUserUses = emoteData.users.reduce((a, b) => a + (b.count || 0), 0);
 
-    // Stats grid
     const stats = document.createElement('div');
     stats.className = 'stats-grid';
     stats.innerHTML = `
@@ -290,31 +293,33 @@ async function fetchEmoteMetrics() {
       <div class="stat-card"><div class="stat-value">${totalMessages}</div><div class="stat-label">Messages Counted</div></div>`;
     container.appendChild(stats);
 
-    // --- Warning system ---
-
-    // 1️⃣ Only show “added after initial counter” if *all* arrays are empty
     const allEmpty =
       emoteData.users.length === 0 &&
       emoteData.channels.length === 0 &&
       emoteData.messages.length === 0;
 
+    // Create a function for reusable warning boxes
+    function createWarning(icon, message) {
+      const div = document.createElement('div');
+      div.className = 'emote-warning';
+      div.innerHTML = `<i class="fa-solid ${icon}"></i> <span>${message}</span>`;
+      return div;
+    }
+
     if (allEmpty && (emoteData.count || 0) > 0) {
-      const oldWarn = document.createElement('div');
-      oldWarn.className = 'emote-warning';
-      oldWarn.innerText =
-        '⚠️ Metrics for this emote were added after the initial counter. To update metrics, send this emote again in chat.';
-      container.appendChild(oldWarn);
+      container.appendChild(createWarning(
+        'fa-triangle-exclamation',
+        'Metrics for this emote were added after the initial counter. To update metrics, send this emote again in chat.'
+      ));
     }
 
-    // 2️⃣ Show mismatch warning only if user totals don’t match total uses
     if (totalUserUses !== emoteData.count && !allEmpty) {
-      const mismatchWarn = document.createElement('div');
-      mismatchWarn.className = 'emote-warning';
-      mismatchWarn.innerText = `❗ The total emoji uses (${emoteData.count}) don’t match the sum of user counts (${totalUserUses}). Some data may be outdated or inconsistent.`;
-      container.appendChild(mismatchWarn);
+      container.appendChild(createWarning(
+        'fa-circle-exclamation',
+        `The total emote uses (${emoteData.count}) don’t match the sum of user counts (${totalUserUses}). Some data may be outdated or inconsistent.`
+      ));
     }
 
-    // --- Sections ---
     const sections = document.createElement('div');
     sections.className = 'sections';
 
