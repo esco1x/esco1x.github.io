@@ -6,34 +6,227 @@
 <title>Lunar Emote Metrics</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
-  body {
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
-    background: radial-gradient(circle at top, #0f0f0f 0%, #050505 100%);
-    color: #e6e6e6;
-    display: flex;
+:root {
+  --accent: #ff4655;
+  --bg-dark: #0a0a0a;
+  --bg-card: rgba(20,20,20,0.7);
+  --text-light: #e6e6e6;
+  --text-muted: #999;
+}
+
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: radial-gradient(circle at top, #0f0f0f 0%, #050505 100%);
+  color: var(--text-light);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 3rem 1rem;
+}
+
+h1 {
+  font-weight: 700;
+  font-size: 2.8rem;
+  color: var(--accent);
+  text-transform: uppercase;
+  text-shadow: 0 0 15px rgba(255,70,85,0.4);
+  margin-bottom: 0.5rem;
+  letter-spacing: 2px;
+}
+
+h2 {
+  font-weight: 400;
+  font-size: 1rem;
+  color: var(--text-muted);
+  margin-bottom: 2rem;
+}
+
+.metrics-container {
+  width: 100%;
+  max-width: 1000px;
+  background: var(--bg-card);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255,70,85,0.2);
+  border-radius: 15px;
+  padding: 2rem;
+  box-shadow: 0 0 25px rgba(255,70,85,0.05);
+  animation: fadeIn 0.6s ease forwards;
+}
+
+.emote-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background: rgba(255,70,85,0.05);
+  border: 1px solid rgba(255,70,85,0.2);
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.emote-header img, .emote-header span {
+  width: 64px;
+  height: 64px;
+  font-size: 2.5rem;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.emote-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.emote-info h3 {
+  margin: 0;
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 1.5rem;
+}
+
+.emote-info p {
+  margin: 0.2rem 0 0;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.stat-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,70,85,0.15);
+  border-radius: 10px;
+  padding: 1.2rem;
+  text-align: center;
+  transition: 0.2s;
+}
+
+.stat-card:hover {
+  background: rgba(255,70,85,0.05);
+  transform: translateY(-3px);
+}
+
+.stat-value {
+  font-size: 1.8rem;
+  color: var(--accent);
+  font-weight: 700;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.sections {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2rem;
+}
+
+.section {
+  background: rgba(25,25,25,0.75);
+  border: 1px solid rgba(255,70,85,0.15);
+  border-radius: 10px;
+  padding: 1rem;
+}
+
+.section-title {
+  font-weight: 700;
+  color: var(--accent);
+  font-size: 1.1rem;
+  border-bottom: 1px solid rgba(255,70,85,0.2);
+  margin-bottom: 0.6rem;
+  padding-bottom: 0.3rem;
+}
+
+.item {
+  background: rgba(35,35,35,0.5);
+  border-radius: 8px;
+  padding: 0.6rem 0.8rem;
+  margin-bottom: 0.5rem;
+  border-left: 3px solid var(--accent);
+}
+
+.item-line {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+  flex-wrap: wrap;
+}
+
+.item-line strong {
+  color: var(--accent);
+}
+
+footer {
+  margin-top: 2rem;
+  font-size: 0.85rem;
+  color: #666;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  color: var(--accent);
+  gap: 0.6rem;
+}
+
+.spinner {
+  border: 3px solid rgba(255,70,85,0.3);
+  border-top: 3px solid var(--accent);
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  animation: spin 1s linear infinite;
+}
+
+/* Animations */
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  body { padding: 2rem 1rem; }
+  h1 { font-size: 2rem; }
+  h2 { font-size: 0.95rem; }
+
+  .emote-header {
     flex-direction: column;
-    align-items: center;
-    min-height: 100vh;
-    padding: 3rem 1rem;
+    text-align: center;
+    gap: 0.5rem;
   }
-  h1 { font-weight: 700; font-size: 2.8rem; color: #ff4655; margin-bottom: 0.5rem; text-transform: uppercase; letter-spacing: 2px; text-shadow: 0 0 15px rgba(255,70,85,0.4); }
-  h2 { font-weight: 400; font-size: 1rem; color: #aaa; margin-bottom: 2rem; letter-spacing: 0.5px; }
-  .metrics-container { width: 100%; max-width: 900px; background: rgba(20,20,20,0.85); border: 1px solid rgba(255,70,85,0.2); border-radius: 15px; box-shadow: 0 0 25px rgba(255,70,85,0.05); padding: 2rem; animation: fadeIn 0.6s ease forwards; display: flex; flex-direction: column; gap: 1rem; }
-  .emote-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1rem; }
-  .emote-header img, .emote-header span { width: 64px; height: 64px; font-size: 2.5rem; border-radius: 10px; display: inline-flex; align-items: center; justify-content: center; }
-  .section { margin-bottom: 1rem; background: rgba(25,25,25,0.8); padding: 1rem; border-radius: 10px; }
-  .section-title { font-weight: 700; color: #ff4655; font-size: 1.1rem; margin-bottom: 0.5rem; border-bottom: 1px solid rgba(255,70,85,0.2); padding-bottom: 0.3rem; }
-  .item { display: flex; flex-direction: column; padding: 0.6rem 0.8rem; border-bottom: 1px solid rgba(255,255,255,0.05); word-break: break-word; border-radius: 5px; background: rgba(35,35,35,0.5); margin-bottom: 0.4rem; }
-  .item:last-child { margin-bottom: 0; border-bottom: none; }
-  .item-line { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; }
-  .item-line strong { color: #ff4655; }
-  .nested { padding-left: 1rem; margin-top: 0.3rem; }
-  .loading { display: flex; justify-content: center; align-items: center; padding: 2rem; font-size: 1rem; color: #ff4655; gap: 0.6rem; }
-  .spinner { border: 3px solid rgba(255,70,85,0.3); border-top: 3px solid #ff4655; border-radius: 50%; width: 20px; height: 20px; animation: spin 1s linear infinite; }
-  @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-  @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
-  footer { margin-top: 2rem; font-size: 0.9rem; color: #666; letter-spacing: 0.3px; }
+
+  .emote-info h3 { font-size: 1.3rem; }
+
+  .stats-grid {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 0.8rem;
+  }
+
+  .sections { grid-template-columns: 1fr; gap: 1rem; }
+
+  .item-line { flex-direction: column; align-items: flex-start; gap: 0.3rem; }
+  .item { padding: 0.5rem 0.7rem; }
+  .stat-card { padding: 1rem; }
+}
+
+@media (max-width: 480px) {
+  h1 { font-size: 1.6rem; }
+  h2 { font-size: 0.85rem; }
+  .emote-header img, .emote-header span { width: 50px; height: 50px; font-size: 2rem; }
+  .emote-info h3 { font-size: 1.1rem; }
+  .stats-grid { grid-template-columns: 1fr 1fr; }
+}
 </style>
 </head>
 <body>
@@ -73,89 +266,61 @@ async function fetchEmoteMetrics() {
     loading.style.display = 'none';
     document.getElementById('emote-subtitle').innerText = `Metrics for "${emoteData.name}"`;
 
-    // Emote header
+    // Header
     const header = document.createElement('div');
     header.className = 'emote-header';
-    if (emoteData.isCustom) {
-      header.innerHTML = `<img src="${emoteData.emoteUrl}" alt="${emoteData.name}">`;
-    } else {
-      header.innerHTML = `<span>${emoteData.emote}</span>`;
-    }
+    header.innerHTML = `
+      ${emoteData.isCustom ? `<img src="${emoteData.emoteUrl}" alt="${emoteData.name}">` : `<span>${emoteData.emote}</span>`}
+      <div class="emote-info">
+        <h3>${emoteData.name}</h3>
+      </div>`;
     container.appendChild(header);
 
-    // Helper: create a styled section
-    function createSection(title, items) {
-      if (!items || (Array.isArray(items) && items.length === 0)) return;
+    // Stat cards (computed dynamically)
+    const stats = document.createElement('div');
+    stats.className = 'stats-grid';
+    stats.innerHTML = `
+      <div class="stat-card"><div class="stat-value">${emoteData.count || 0}</div><div class="stat-label">Total Uses</div></div>
+      <div class="stat-card"><div class="stat-value">${(emoteData.users||[]).length}</div><div class="stat-label">Unique Users</div></div>
+      <div class="stat-card"><div class="stat-value">${(emoteData.channels||[]).length}</div><div class="stat-label">Channels Used</div></div>
+      <div class="stat-card"><div class="stat-value">${(emoteData.messages||[]).length}</div><div class="stat-label">Messages Counted</div></div>
+    `;
+    container.appendChild(stats);
+
+    // Sections grid
+    const sections = document.createElement('div');
+    sections.className = 'sections';
+
+    function createSection(title, items, type) {
+      if (!items || items.length === 0) return null;
       const section = document.createElement('div');
       section.className = 'section';
-      const sectionTitle = document.createElement('div');
-      sectionTitle.className = 'section-title';
-      sectionTitle.innerText = title;
-      section.appendChild(sectionTitle);
-
-      if (Array.isArray(items)) {
-        items.forEach(item => {
-          const itemDiv = document.createElement('div');
-          itemDiv.className = 'item';
-          if (typeof item === 'object') {
-            if (item.content && item.authorTag && item.channelId) {
-              const authorLine = document.createElement('div');
-              authorLine.className = 'item-line';
-              authorLine.innerHTML = `<strong>Author:</strong> ${item.authorTag}`;
-              const channelLine = document.createElement('div');
-              channelLine.className = 'item-line';
-              channelLine.innerHTML = `<strong>Channel ID:</strong> ${item.channelId}`;
-              const contentLine = document.createElement('div');
-              contentLine.className = 'item-line';
-              contentLine.innerHTML = `<strong>Content:</strong> ${item.content}`;
-              const timestampLine = document.createElement('div');
-              timestampLine.className = 'item-line';
-              timestampLine.innerHTML = `<strong>Timestamp:</strong> ${new Date(item.timestamp).toLocaleString()}`;
-
-              itemDiv.append(authorLine, channelLine, contentLine, timestampLine);
-            } else {
-              Object.entries(item)
-                .filter(([k]) => !['_id','__v', 'emote'].includes(k))
-                .forEach(([k,v]) => {
-                  const line = document.createElement('div');
-                  line.className = 'item-line';
-                  line.innerHTML = `<strong>${k}:</strong> ${v}`;
-                  itemDiv.appendChild(line);
-                });
-            }
-          } else {
-            itemDiv.innerText = item;
-          }
-          section.appendChild(itemDiv);
-        });
-      } else if (typeof items === 'object') {
-        Object.entries(items).forEach(([k,v]) => {
-          if (['_id','__v', 'emote'].includes(k)) return;
-          const itemDiv = document.createElement('div');
-          itemDiv.className = 'item';
-          itemDiv.innerHTML = `<strong>${k}:</strong> ${v}`;
-          section.appendChild(itemDiv);
-        });
-      }
-
-      container.appendChild(section);
+      section.innerHTML = `<div class="section-title">${title}</div>`;
+      items.forEach(i => {
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'item';
+        if (type === 'user') {
+          itemDiv.innerHTML = `<div class="item-line"><strong>${i.username}</strong><span>${i.count} uses</span></div>`;
+        } else if (type === 'channel') {
+          itemDiv.innerHTML = `<div class="item-line"><strong>#${i.name}</strong><span>${i.count} uses</span></div>`;
+        } else if (type === 'message') {
+          itemDiv.innerHTML = `<div class="item-line"><strong>${i.authorTag}</strong><span>${new Date(i.timestamp).toLocaleString()}</span></div><div>${i.content}</div>`;
+        }
+        section.appendChild(itemDiv);
+      });
+      return section;
     }
 
-    // Sort and limit top entries
-    const {users, channels, messages, ...details} = emoteData;
-    const sortedUsers = (users || []).sort((a,b) => b.count - a.count).slice(0, 5);
-    const sortedChannels = (channels || []).sort((a,b) => b.count - a.count).slice(0, 5);
-    const sortedMessages = (messages || [])
-      .sort((a,b) => new Date(b.timestamp) - new Date(a.timestamp))
-      .slice(0, 5);
-    createSection('Emote Details', details);
-    createSection('Top Users', sortedUsers);
-    createSection('Top Channels', sortedChannels);
-    createSection('Recent Messages', sortedMessages);
+    const topUsers = createSection('Top Users', (emoteData.users||[]).sort((a,b)=>b.count-a.count).slice(0,5), 'user');
+    const topChannels = createSection('Top Channels', (emoteData.channels||[]).sort((a,b)=>b.count-a.count).slice(0,5), 'channel');
+    const recentMessages = createSection('Recent Messages', (emoteData.messages||[]).sort((a,b)=>new Date(b.timestamp)-new Date(a.timestamp)).slice(0,5), 'message');
+
+    [topUsers, topChannels, recentMessages].forEach(s => s && sections.appendChild(s));
+    container.appendChild(sections);
 
   } catch (err) {
-    console.error('Failed to fetch emote metrics:', err);
-    loading.innerText = 'Failed to load emote metrics.';
+    console.error(err);
+    loading.innerText = 'Failed to load metrics.';
   }
 }
 fetchEmoteMetrics();
