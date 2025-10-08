@@ -99,7 +99,6 @@ async function fetchEmoteMetrics() {
           itemDiv.className = 'item';
           if (typeof item === 'object') {
             if (item.content && item.authorTag && item.channelId) {
-              // Message block styling
               const authorLine = document.createElement('div');
               authorLine.className = 'item-line';
               authorLine.innerHTML = `<strong>Author:</strong> ${item.authorTag}`;
@@ -116,7 +115,7 @@ async function fetchEmoteMetrics() {
               itemDiv.append(authorLine, channelLine, contentLine, timestampLine);
             } else {
               Object.entries(item)
-                .filter(([k]) => !['_id','__v', 'emote' ].includes(k))
+                .filter(([k]) => !['_id','__v', 'emote'].includes(k))
                 .forEach(([k,v]) => {
                   const line = document.createElement('div');
                   line.className = 'item-line';
@@ -131,7 +130,7 @@ async function fetchEmoteMetrics() {
         });
       } else if (typeof items === 'object') {
         Object.entries(items).forEach(([k,v]) => {
-          if (['_id','__v', 'emote' ].includes(k)) return;
+          if (['_id','__v', 'emote'].includes(k)) return;
           const itemDiv = document.createElement('div');
           itemDiv.className = 'item';
           itemDiv.innerHTML = `<strong>${k}:</strong> ${v}`;
@@ -142,20 +141,23 @@ async function fetchEmoteMetrics() {
       container.appendChild(section);
     }
 
-    // Section ordering: Emote details first, then Users, Channels, Messages
+    // Sort and limit top entries
     const {users, channels, messages, ...details} = emoteData;
-
+    const sortedUsers = (users || []).sort((a,b) => b.count - a.count).slice(0, 5);
+    const sortedChannels = (channels || []).sort((a,b) => b.count - a.count).slice(0, 5);
+    const sortedMessages = (messages || [])
+      .sort((a,b) => new Date(b.timestamp) - new Date(a.timestamp))
+      .slice(0, 5);
     createSection('Emote Details', details);
-    createSection('Top Users', users);
-    createSection('Top Channels', channels);
-    createSection('Recent Messages', messages);
+    createSection('Top Users', sortedUsers);
+    createSection('Top Channels', sortedChannels);
+    createSection('Recent Messages', sortedMessages);
 
   } catch (err) {
     console.error('Failed to fetch emote metrics:', err);
     loading.innerText = 'Failed to load emote metrics.';
   }
 }
-
 fetchEmoteMetrics();
 </script>
 </body>
