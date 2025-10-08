@@ -276,18 +276,35 @@ async function fetchEmoteMetrics() {
       </div>`;
     container.appendChild(header);
 
-    // Stat cards (computed dynamically)
+    // Stat cards
     const stats = document.createElement('div');
     stats.className = 'stats-grid';
+    const totalUsers = (emoteData.users||[]).length;
+    const totalChannels = (emoteData.channels||[]).length;
+    const totalMessages = (emoteData.messages||[]).length;
+
     stats.innerHTML = `
       <div class="stat-card"><div class="stat-value">${emoteData.count || 0}</div><div class="stat-label">Total Uses</div></div>
-      <div class="stat-card"><div class="stat-value">${(emoteData.users||[]).length}</div><div class="stat-label">Unique Users</div></div>
-      <div class="stat-card"><div class="stat-value">${(emoteData.channels||[]).length}</div><div class="stat-label">Channels Used</div></div>
-      <div class="stat-card"><div class="stat-value">${(emoteData.messages||[]).length}</div><div class="stat-label">Messages Counted</div></div>
+      <div class="stat-card"><div class="stat-value">${totalUsers}</div><div class="stat-label">Unique Users</div></div>
+      <div class="stat-card"><div class="stat-value">${totalChannels}</div><div class="stat-label">Channels Used</div></div>
+      <div class="stat-card"><div class="stat-value">${totalMessages}</div><div class="stat-label">Messages Counted</div></div>
     `;
     container.appendChild(stats);
 
-    // Sections grid
+    // Warning if metrics are missing
+    if (totalUsers + totalChannels + totalMessages < emoteData.count) {
+      const warning = document.createElement('div');
+      warning.style.marginTop = '1rem';
+      warning.style.padding = '1rem';
+      warning.style.border = '1px solid var(--accent)';
+      warning.style.borderRadius = '10px';
+      warning.style.background = 'rgba(255,70,85,0.1)';
+      warning.style.color = 'var(--accent)';
+      warning.innerText = '⚠️ Metrics for this emote were added after the initial counter. To update metrics, send this emote again in chat.';
+      container.appendChild(warning);
+    }
+
+    // Sections
     const sections = document.createElement('div');
     sections.className = 'sections';
 
