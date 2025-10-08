@@ -262,7 +262,7 @@ async function fetchEmoteMetrics() {
     loading.style.display = 'none';
     document.getElementById('emote-subtitle').innerText = `Metrics for "${emoteData.name}"`;
 
-    // Create header
+    // Header
     const header = document.createElement('div');
     header.className = 'emote-header';
     header.innerHTML = `
@@ -273,14 +273,14 @@ async function fetchEmoteMetrics() {
     container.appendChild(header);
 
     // Safe defaults
-    emoteData.users = emoteData.users || [];
-    emoteData.channels = emoteData.channels || [];
-    emoteData.messages = emoteData.messages || [];
+    emoteData.users = Array.isArray(emoteData.users) ? emoteData.users : [];
+    emoteData.channels = Array.isArray(emoteData.channels) ? emoteData.channels : [];
+    emoteData.messages = Array.isArray(emoteData.messages) ? emoteData.messages : [];
 
-    // Stats
     const totalMessages = emoteData.messages.length;
     const totalUserUses = emoteData.users.reduce((a, b) => a + (b.count || 0), 0);
 
+    // Stats grid
     const stats = document.createElement('div');
     stats.className = 'stats-grid';
     stats.innerHTML = `
@@ -292,19 +292,25 @@ async function fetchEmoteMetrics() {
 
     // --- Warning system ---
 
-    // 1️⃣ If metrics are missing entirely
-    if (emoteData.users.length === 0 && emoteData.channels.length === 0 && emoteData.messages.length === 0 && emoteData.count > 0) {
+    // 1️⃣ Only show “added after initial counter” if *all* arrays are empty
+    const allEmpty =
+      emoteData.users.length === 0 &&
+      emoteData.channels.length === 0 &&
+      emoteData.messages.length === 0;
+
+    if (allEmpty && (emoteData.count || 0) > 0) {
       const oldWarn = document.createElement('div');
       oldWarn.className = 'emote-warning';
-      oldWarn.innerText = '⚠️ Metrics for this emote were added after the initial counter. Send this emote again to update metrics.';
+      oldWarn.innerText =
+        '⚠️ Metrics for this emote were added after the initial counter. To update metrics, send this emote again in chat.';
       container.appendChild(oldWarn);
     }
 
-    // 2️⃣ If total uses don’t match the sum of user counts
-    if (totalUserUses !== emoteData.count) {
+    // 2️⃣ Show mismatch warning only if user totals don’t match total uses
+    if (totalUserUses !== emoteData.count && !allEmpty) {
       const mismatchWarn = document.createElement('div');
       mismatchWarn.className = 'emote-warning';
-      mismatchWarn.innerText = `❗ The total emote uses (${emoteData.count}) don’t match the sum of user counts (${totalUserUses}). Some data may be outdated or inconsistent.`;
+      mismatchWarn.innerText = `❗ The total emoji uses (${emoteData.count}) don’t match the sum of user counts (${totalUserUses}). Some data may be outdated or inconsistent.`;
       container.appendChild(mismatchWarn);
     }
 
@@ -332,9 +338,9 @@ async function fetchEmoteMetrics() {
       return section;
     }
 
-    const topUsers = createSection('Top Users', emoteData.users.sort((a,b)=>b.count-a.count).slice(0,5), 'user');
-    const topChannels = createSection('Top Channels', emoteData.channels.sort((a,b)=>b.count-a.count).slice(0,5), 'channel');
-    const recentMessages = createSection('Recent Messages', emoteData.messages.sort((a,b)=>new Date(b.timestamp)-new Date(a.timestamp)).slice(0,5), 'message');
+    const topUsers = createSection('Top Users', emoteData.users.sort((a, b) => b.count - a.count).slice(0, 5), 'user');
+    const topChannels = createSection('Top Channels', emoteData.channels.sort((a, b) => b.count - a.count).slice(0, 5), 'channel');
+    const recentMessages = createSection('Recent Messages', emoteData.messages.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp)).slice(0, 5), 'message');
 
     [topUsers, topChannels, recentMessages].forEach(s => s && sections.appendChild(s));
     container.appendChild(sections);
@@ -344,6 +350,7 @@ async function fetchEmoteMetrics() {
     loading.innerText = 'Failed to load metrics.';
   }
 }
+
 fetchEmoteMetrics();
 </script>
 </body>
