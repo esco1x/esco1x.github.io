@@ -14,6 +14,11 @@
   --text-muted:#999;
 }
 
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
 body{
   margin:0;
   font-family:'Poppins',sans-serif;
@@ -52,6 +57,7 @@ h2{
   padding:2rem;
   box-shadow:0 0 25px rgba(255,70,85,0.05);
   animation:fadeIn .6s ease forwards;
+  overflow:hidden;
 }
 
 .emote-header{
@@ -63,6 +69,7 @@ h2{
   border-radius:12px;
   padding:1rem 1.5rem;
   margin-bottom:1.5rem;
+  flex-wrap:wrap;
 }
 
 .emote-header img, .emote-header span.emote-icon{
@@ -73,6 +80,8 @@ h2{
   display:inline-flex;
   align-items:center;
   justify-content:center;
+  max-width:100%; 
+  height:auto;
 }
 
 .emote-info{
@@ -80,6 +89,7 @@ h2{
   display:flex;
   flex-direction:column;
   justify-content:center;
+  min-width:0; 
 }
 
 .emote-info h3{
@@ -90,6 +100,7 @@ h2{
   display:flex;
   align-items:center;
   gap:.6rem;
+  flex-wrap:wrap;
 }
 
 .emote-rank{
@@ -121,6 +132,7 @@ h2{
   margin:.2rem 0 0;
   color:var(--text-muted);
   font-size:0.88rem;
+  word-break:break-word; 
 }
 
 .stats-grid{
@@ -184,6 +196,7 @@ h2{
   grid-template-columns:1fr 1fr;
   gap:1.2rem;
   margin-top:1.4rem;
+  width:100%; 
 }
 
 .section{
