@@ -22,11 +22,11 @@
     h1 {
       font-weight: 700;
       font-size: 2.8rem;
-      color: #ff4655;
+      color: #b26eff;
       margin-bottom: 0.5rem;
       text-transform: uppercase;
       letter-spacing: 2px;
-      text-shadow: 0 0 15px rgba(255, 70, 85, 0.4);
+      text-shadow: 0 0 15px rgba(178, 110, 255, 0.4);
     }
 
     h2 {
@@ -41,9 +41,9 @@
       width: 100%;
       max-width: 700px;
       background: rgba(20, 20, 20, 0.85);
-      border: 1px solid rgba(255, 70, 85, 0.2);
+      border: 1px solid rgba(178, 110, 255, 0.2);
       border-radius: 15px;
-      box-shadow: 0 0 25px rgba(255, 70, 85, 0.05);
+      box-shadow: 0 0 25px rgba(178, 110, 255, 0.05);
       overflow: hidden;
       animation: fadeIn 0.6s ease forwards;
     }
@@ -57,12 +57,12 @@
     }
 
     .leaderboard-header {
-      background: rgba(255, 70, 85, 0.15);
-      color: #ff4655;
+      background: rgba(178, 110, 255, 0.15);
+      color: #b26eff;
       text-transform: uppercase;
       font-weight: 600;
       font-size: 0.9rem;
-      border-bottom: 1px solid rgba(255, 70, 85, 0.2);
+      border-bottom: 1px solid rgba(178, 110, 255, 0.2);
       letter-spacing: 0.8px;
     }
 
@@ -74,7 +74,7 @@
     }
 
     .leaderboard-row:hover {
-      background: rgba(255, 70, 85, 0.1);
+      background: rgba(178, 110, 255, 0.1);
       transform: translateY(-2px);
     }
 
@@ -82,7 +82,7 @@
       text-align: center;
       font-weight: 700;
       font-size: 1.1rem;
-      color: #ff4655;
+      color: #b26eff;
     }
 
     .user {
@@ -119,7 +119,7 @@
       left: 50%;
       transform: translateX(-50%) translateY(-6px);
       background: rgba(15, 15, 15, 0.95);
-      color: #ff4655;
+      color: #b26eff;
       font-size: 0.8rem;
       padding: 5px 10px;
       border-radius: 6px;
@@ -127,9 +127,9 @@
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.2s ease, transform 0.2s ease;
-      border: 1px solid rgba(255, 70, 85, 0.4);
-      box-shadow: 0 0 10px rgba(255, 70, 85, 0.3);
-      text-shadow: 0 0 6px rgba(255, 70, 85, 0.6);
+      border: 1px solid rgba(178, 110, 255, 0.4);
+      box-shadow: 0 0 10px rgba(178, 110, 255, 0.3);
+      text-shadow: 0 0 6px rgba(178, 110, 255, 0.6);
     }
 
     .tooltip::after {
@@ -148,29 +148,40 @@
       transform: translateX(-50%) translateY(-10px);
     }
 
+    /* ===== Glowing Usernames (Lunar Purple Theme) ===== */
     .first-place .username {
-      color: #ff4655;
-      text-shadow: 0 0 10px rgba(255, 70, 85, 0.9), 0 0 20px rgba(255, 70, 85, 0.6);
-      animation: pulseRed 1.8s infinite alternate;
+      color: #b26eff;
+      text-shadow: 0 0 10px rgba(178, 110, 255, 0.9), 0 0 20px rgba(178, 110, 255, 0.6);
+      animation: pulsePurple 1.8s infinite alternate;
     }
 
     .second-place .username {
-      color: #ff6b73;
-      text-shadow: 0 0 8px rgba(255, 107, 115, 0.8), 0 0 16px rgba(255, 107, 115, 0.5);
-      animation: pulseRed 2s infinite alternate;
+      color: #c390ff;
+      text-shadow: 0 0 8px rgba(195, 144, 255, 0.8), 0 0 16px rgba(195, 144, 255, 0.5);
+      animation: pulsePurple 2s infinite alternate;
     }
 
     .third-place .username {
-      color: #ff8a8f;
-      text-shadow: 0 0 6px rgba(255, 138, 143, 0.7), 0 0 14px rgba(255, 138, 143, 0.4);
-      animation: pulseRed 2.2s infinite alternate;
+      color: #d1a8ff;
+      text-shadow: 0 0 6px rgba(209, 168, 255, 0.7), 0 0 14px rgba(209, 168, 255, 0.4);
+      animation: pulsePurple 2.2s infinite alternate;
+    }
+
+    @keyframes pulsePurple {
+      from {
+        text-shadow: 0 0 8px rgba(178, 110, 255, 0.4);
+      }
+
+      to {
+        text-shadow: 0 0 20px rgba(178, 110, 255, 1);
+      }
     }
 
     .messageCount {
       text-align: center;
       font-weight: 700;
       font-size: 1.1rem;
-      color: #ff4655;
+      color: #b26eff;
     }
 
     .loading {
@@ -179,13 +190,13 @@
       align-items: center;
       padding: 2rem;
       font-size: 1rem;
-      color: #ff4655;
+      color: #b26eff;
       gap: 0.6rem;
     }
 
     .spinner {
-      border: 3px solid rgba(255, 70, 85, 0.3);
-      border-top: 3px solid #ff4655;
+      border: 3px solid rgba(178, 110, 255, 0.3);
+      border-top: 3px solid #b26eff;
       border-radius: 50%;
       width: 20px;
       height: 20px;
