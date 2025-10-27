@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -22,11 +23,11 @@
     h1 {
       font-weight: 700;
       font-size: 2.8rem;
-      color: #ff4655;
+      color: #b26eff;
       margin-bottom: 0.5rem;
       text-transform: uppercase;
       letter-spacing: 2px;
-      text-shadow: 0 0 15px rgba(255, 70, 85, 0.4);
+      text-shadow: 0 0 15px rgba(178, 110, 255, 0.4);
     }
 
     h2 {
@@ -42,9 +43,9 @@
       width: 100%;
       max-width: 700px;
       background: rgba(20, 20, 20, 0.85);
-      border: 1px solid rgba(255, 70, 85, 0.2);
+      border: 1px solid rgba(178, 110, 255, 0.2);
       border-radius: 15px;
-      box-shadow: 0 0 25px rgba(255, 70, 85, 0.05);
+      box-shadow: 0 0 25px rgba(178, 110, 255, 0.05);
       overflow: hidden;
       animation: fadeIn 0.6s ease forwards;
     }
@@ -58,12 +59,12 @@
     }
 
     .leaderboard-header {
-      background: rgba(255, 70, 85, 0.15);
-      color: #ff4655;
+      background: rgba(178, 110, 255, 0.15);
+      color: #b26eff;
       text-transform: uppercase;
       font-weight: 600;
       font-size: 0.9rem;
-      border-bottom: 1px solid rgba(255, 70, 85, 0.2);
+      border-bottom: 1px solid rgba(178, 110, 255, 0.2);
       letter-spacing: 0.8px;
     }
 
@@ -74,7 +75,7 @@
     }
 
     .leaderboard-row:hover {
-      background: rgba(255, 70, 85, 0.1);
+      background: rgba(178, 110, 255, 0.1);
       transform: translateY(-2px);
     }
 
@@ -82,7 +83,7 @@
       text-align: center;
       font-weight: 700;
       font-size: 1.1rem;
-      color: #ff4655;
+      color: #b26eff;
     }
 
     .user {
@@ -97,7 +98,7 @@
       width: 48px;
       height: 48px;
       border-radius: 50%;
-      border: 2px solid rgba(255, 70, 85, 0.5);
+      border: 2px solid rgba(178, 110, 255, 0.5);
       object-fit: cover;
     }
 
@@ -108,35 +109,40 @@
       transition: text-shadow 0.3s, color 0.3s;
     }
 
-    /* ===== Glowing Usernames (Valorant Red Theme) ===== */
+    /* ===== Glowing Usernames (Lunar Purple Theme) ===== */
     .first-place .username {
-      color: #ff4655;
-      text-shadow: 0 0 10px rgba(255, 70, 85, 0.9), 0 0 20px rgba(255, 70, 85, 0.6);
-      animation: pulseRed 1.8s infinite alternate;
+      color: #b26eff;
+      text-shadow: 0 0 10px rgba(178, 110, 255, 0.9), 0 0 20px rgba(178, 110, 255, 0.6);
+      animation: pulsePurple 1.8s infinite alternate;
     }
 
     .second-place .username {
-      color: #ff6b73;
-      text-shadow: 0 0 8px rgba(255, 107, 115, 0.8), 0 0 16px rgba(255, 107, 115, 0.5);
-      animation: pulseRed 2s infinite alternate;
+      color: #c390ff;
+      text-shadow: 0 0 8px rgba(195, 144, 255, 0.8), 0 0 16px rgba(195, 144, 255, 0.5);
+      animation: pulsePurple 2s infinite alternate;
     }
 
     .third-place .username {
-      color: #ff8a8f;
-      text-shadow: 0 0 6px rgba(255, 138, 143, 0.7), 0 0 14px rgba(255, 138, 143, 0.4);
-      animation: pulseRed 2.2s infinite alternate;
+      color: #d1a8ff;
+      text-shadow: 0 0 6px rgba(209, 168, 255, 0.7), 0 0 14px rgba(209, 168, 255, 0.4);
+      animation: pulsePurple 2.2s infinite alternate;
     }
 
-    @keyframes pulseRed {
-      from { text-shadow: 0 0 8px rgba(255, 70, 85, 0.4); }
-      to { text-shadow: 0 0 20px rgba(255, 70, 85, 1); }
+    @keyframes pulsePurple {
+      from {
+        text-shadow: 0 0 8px rgba(178, 110, 255, 0.4);
+      }
+
+      to {
+        text-shadow: 0 0 20px rgba(178, 110, 255, 1);
+      }
     }
 
     .messageCount {
       text-align: center;
       font-weight: 700;
       font-size: 1.1rem;
-      color: #ff4655;
+      color: #b26eff;
     }
 
     /* ===== Loading ===== */
@@ -146,13 +152,13 @@
       align-items: center;
       padding: 2rem;
       font-size: 1rem;
-      color: #ff4655;
+      color: #b26eff;
       gap: 0.6rem;
     }
 
     .spinner {
-      border: 3px solid rgba(255, 70, 85, 0.3);
-      border-top: 3px solid #ff4655;
+      border: 3px solid rgba(178, 110, 255, 0.3);
+      border-top: 3px solid #b26eff;
       border-radius: 50%;
       width: 20px;
       height: 20px;
@@ -160,13 +166,25 @@
     }
 
     @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+      0% {
+        transform: rotate(0deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(15px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(15px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     footer {
@@ -177,16 +195,30 @@
     }
 
     @media (max-width: 500px) {
-      .leaderboard-header, .leaderboard-row {
+
+      .leaderboard-header,
+      .leaderboard-row {
         grid-template-columns: 40px 1fr 50px;
         padding: 0.6rem 0.9rem;
       }
-      .user img { width: 38px; height: 38px; }
-      .username { font-size: 0.9rem; }
-      .rank, .messageCount { font-size: 0.9rem; }
+
+      .user img {
+        width: 38px;
+        height: 38px;
+      }
+
+      .username {
+        font-size: 0.9rem;
+      }
+
+      .rank,
+      .messageCount {
+        font-size: 0.9rem;
+      }
     }
-  </style>
+  </style>  
 </head>
+
 <body>
 
   <h1>Lunar Leaderboard</h1>
@@ -242,4 +274,5 @@
     fetchLeaderboard();
   </script>
 </body>
+
 </html>
