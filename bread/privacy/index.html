@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Privacy Policy – Bread Bot</title>
+  <title>Bread Bot - Privacy Policy</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
@@ -110,6 +110,16 @@
         opacity: 1;
         transform: translateY(0);
       }
+    }
+
+    /* Highlight box effect */
+    .highlight-section {
+      border: 2px solid rgba(178, 110, 255, 0.5);
+      box-shadow: 0 0 25px rgba(178, 110, 255, 0.2);
+      border-radius: 10px;
+      background: rgba(178, 110, 255, 0.05);
+      transition: all 1s ease;
+      padding: 1rem;
     }
   </style>
 </head>
@@ -221,5 +231,46 @@
   </div>
 
   <footer>© 2025 eggrial.lol (Bread Bot Developer). All rights reserved.</footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const params = new URLSearchParams(window.location.search);
+      const sectionNum = params.get("section");
+
+      if (sectionNum) {
+        const headings = document.querySelectorAll(".tos-container h3");
+        const index = parseInt(sectionNum) - 1;
+        const current = headings[index];
+        const next = headings[index + 1];
+
+        if (current) {
+          const content = [];
+          let node = current.nextElementSibling;
+          while (node && node !== next) {
+            content.push(node);
+            node = node.nextElementSibling;
+          }
+
+          const wrapper = document.createElement("div");
+          wrapper.classList.add("highlight-section");
+
+          current.parentNode.insertBefore(wrapper, current);
+
+          wrapper.appendChild(current);
+          content.forEach(el => wrapper.appendChild(el));
+
+          wrapper.scrollIntoView({ behavior: "smooth", block: "center" });
+
+          setTimeout(() => {
+            wrapper.style.transition = "all 1.5s ease";
+            wrapper.style.background = "transparent";
+            wrapper.style.boxShadow = "none";
+            wrapper.style.borderColor = "rgba(178, 110, 255, 0.1)";
+          }, 5000);
+        }
+      }
+    });
+  </script>
+
 </body>
 </html>
