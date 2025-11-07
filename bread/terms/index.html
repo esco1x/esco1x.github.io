@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Bread Bot – Terms of Service</title>
+    <title>Bread Bot - Terms of Service</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
       body {
@@ -102,6 +102,15 @@
         background: rgba(178, 110, 255, 0.15);
         margin: 1.5rem 0;
       }
+
+      .highlight-box {
+        border: 1px solid rgba(178, 110, 255, 0.4);
+        box-shadow: 0 0 25px rgba(178, 110, 255, 0.3);
+        border-radius: 10px;
+        background: rgba(178, 110, 255, 0.05);
+        transition: all 0.5s ease;
+        padding: 1rem;
+      }
     </style>
   </head>
 
@@ -178,5 +187,42 @@
         &copy; 2025 eggrial.lol (Bread Bot Developer). All rights reserved.
       </footer>
     </div>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const params = new URLSearchParams(window.location.search);
+        const sectionNum = params.get("section");
+
+        if (sectionNum) {
+          const headings = document.querySelectorAll(".tos-container h3");
+          const targetHeading = headings[parseInt(sectionNum) - 1];
+
+          if (targetHeading) {
+            const sectionElements = [];
+            let sibling = targetHeading.nextElementSibling;
+
+            while (sibling && sibling.tagName !== "H3" && sibling.tagName !== "FOOTER") {
+              sectionElements.push(sibling);
+              sibling = sibling.nextElementSibling;
+            }
+
+            const wrapper = document.createElement("div");
+            wrapper.classList.add("highlight-box");
+
+            targetHeading.parentNode.insertBefore(wrapper, targetHeading);
+            wrapper.appendChild(targetHeading);
+            sectionElements.forEach(el => wrapper.appendChild(el));
+
+            wrapper.scrollIntoView({ behavior: "smooth", block: "center" });
+            setTimeout(() => {
+              wrapper.style.transition = "all 1s ease";
+              wrapper.style.background = "rgba(178, 110, 255, 0.02)";
+              wrapper.style.boxShadow = "none";
+              wrapper.style.borderColor = "rgba(178, 110, 255, 0.15)";
+            }, 4000);
+          }
+        }
+      });
+    </script>
   </body>
 </html>
