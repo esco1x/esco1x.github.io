@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Minecraft Material Checklist</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg1: #0f0f0f;
+            --bg2: #050505;
+            --panel: rgba(20, 20, 20, 0.85);
+            --accent: #b26eff;
+            --accent-2: #8b4eff;
+            --muted: #aaa;
+        }
+
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg1);
+            color: #e6e6e6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            padding: 2rem 1rem;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            overflow-y: auto;
+        }
+
+        h1 {
+            font-weight: 700;
+            font-size: 2.2rem;
+            color: var(--accent);
+            margin-bottom: 0.25rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-align: center;
+            text-shadow: 0 0 15px rgba(178, 110, 255, 0.36);
+        }
+
+        h2 {
+            font-weight: 400;
+            font-size: 0.95rem;
+            color: var(--muted);
+            margin-bottom: 1.2rem;
+            letter-spacing: 0.5px;
+            text-align: center;
+        }
+
+        .checklist-container {
+            width: 100%;
+            max-width: 780px;
+            background: radial-gradient(circle at top, var(--bg1) 0%, var(--bg2) 100%);
+            border: 1px solid rgba(178, 110, 255, 0.18);
+            border-radius: 14px;
+            box-shadow: 0 8px 30px rgba(178, 110, 255, 0.05);
+            padding: 1.6rem;
+            animation: fadeIn 0.45s ease forwards;
+        }
+
+        .input-section {
+            display: flex;
+            flex-direction: column;
+            gap: 0.9rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .input-group {
+            display: flex;
+            gap: 0.7rem;
+            flex-wrap: wrap;
+        }
+
+        input,
+        textarea,
+        .fake-input {
+            flex: 1;
+            min-width: 0;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(178, 110, 255, 0.14);
+            border-radius: 10px;
+            padding: 0.6rem 0.85rem;
+            color: #fff;
+            font-size: 0.95rem;
+            outline: none;
+            transition: box-shadow .16s, border-color .16s, transform .08s;
+            -webkit-appearance: none;
+        }
+
+        input:focus,
+        textarea:focus {
+            box-shadow: 0 0 14px rgba(178, 110, 255, 0.08);
+            border-color: rgba(178, 110, 255, 0.32);
+        }
+
+        input[type=number]::-webkit-outer-spin-button,
+        input[type=number]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type=number] {
+            -moz-appearance: textfield;
+        }
+
+        textarea {
+            min-height: 84px;
+            resize: vertical;
+            padding: 0.85rem;
+        }
+
+        .btn {
+            background: linear-gradient(90deg, var(--accent-2), var(--accent));
+            border: none;
+            color: white;
+            padding: 0.62rem 1rem;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            gap: 0.5rem;
+            align-items: center;
+            justify-content: center;
+            transition: transform .12s, box-shadow .12s;
+            font-size: 0.9rem;
+        }
+
+        .btn:active {
+            transform: translateY(1px);
+        }
+
+        .btn:hover {
+            box-shadow: 0 8px 28px rgba(178, 110, 255, 0.16);
+        }
+
+        hr {
+            border: none;
+            height: 1px;
+            background: rgba(178, 110, 255, 0.08);
+            margin: 1.25rem 0;
+            border-radius: 2px;
+        }
+
+        .material-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            max-height: 50vh;
+            overflow-y: auto;
+            padding-right: 6px;
+        }
+
+        .material-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(24, 24, 24, 0.85);
+            border-radius: 10px;
+            padding: 0.72rem 0.9rem;
+            border: 1px solid rgba(178, 110, 255, 0.06);
+            transition: background .14s, transform .08s, box-shadow .12s, opacity .18s;
+        }
+
+        .material-item:hover {
+            background: rgba(178, 110, 255, 0.06);
+            box-shadow: 0 6px 20px rgba(178, 110, 255, 0.03);
+            transform: translateY(-2px);
+        }
+
+        .material-left {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            min-width: 0;
+        }
+
+        .material-left .material-name {
+            font-weight: 600;
+            color: #fff;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 40ch;
+        }
+
+        .material-left .material-amount {
+            color: var(--accent);
+            font-weight: 600;
+            margin-left: 6px;
+            min-width: 50px;
+            text-align: right;
+        }
+
+        input[type=checkbox] {
+            width: 22px;
+            height: 22px;
+            cursor: pointer;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            border: 2px solid rgba(178, 110, 255, 0.5);
+            border-radius: 5px;
+            position: relative;
+            background: rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        input[type=checkbox]::after {
+            content: "\f00c";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            color: #fff;
+            font-size: 14px;
+            opacity: 0;
+            transition: opacity 0.18s ease, transform 0.18s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        input[type=checkbox]:checked::after {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .material-item.checked .material-name,
+        .material-item.checked .material-amount {
+            opacity: 0.45;
+            text-decoration: line-through;
+        }
+
+        .actions {
+            display: flex;
+            gap: 0.5rem;
+            align-items: center;
+        }
+
+        .icon-btn {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(178, 110, 255, 0.06);
+            color: var(--accent);
+            padding: 0.45rem;
+            border-radius: 8px;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: background .12s, transform .08s, color .12s;
+            min-width: 36px;
+            min-height: 36px;
+        }
+
+        .icon-btn:hover {
+            background: rgba(178, 110, 255, 0.06);
+            color: #e7d1ff;
+            transform: translateY(-2px);
+        }
+
+        .modal {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 60;
+            background: rgba(2, 2, 2, 0.55);
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity .18s ease, visibility .18s;
+        }
+
+        .modal.show {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .modal-card {
+            width: 92%;
+            max-width: 420px;
+            background: linear-gradient(180deg, rgba(18, 18, 18, 0.98), rgba(24, 24, 24, 0.98));
+            border-radius: 14px;
+            padding: 1.2rem 1.2rem 1.1rem;
+            border: 1px solid rgba(178, 110, 255, 0.14);
+            box-shadow: 0 18px 60px rgba(178, 110, 255, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.02);
+            transform: translateY(8px);
+        }
+
+        .modal-head {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.6rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .modal-title {
+            color: var(--accent);
+            font-weight: 700;
+            letter-spacing: 0.6px;
+            font-size: 1.05rem;
+            text-shadow: 0 0 8px rgba(178, 110, 255, 0.14);
+        }
+
+        .modal-close {
+            background: transparent;
+            border: none;
+            color: rgba(255, 255, 255, 0.65);
+            font-size: 1.1rem;
+            cursor: pointer;
+            padding: 0.2rem 0.4rem;
+            border-radius: 8px;
+        }
+
+        .modal-close:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.02);
+            transform: translateY(-2px);
+        }
+
+        .modal-body {
+            display: flex;
+            flex-direction: column;
+            gap: 0.7rem;
+        }
+
+        .modal-note {
+            font-size: 0.82rem;
+            color: var(--muted);
+            margin-bottom: 0.2rem;
+        }
+
+        .modal-footer {
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.6rem;
+            margin-top: 0.6rem;
+        }
+
+        .btn-ghost {
+            background: rgba(255, 255, 255, 0.03);
+            color: #ddd;
+            padding: 0.56rem 0.9rem;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
+        }
+
+        .btn-primary {
+            background: linear-gradient(90deg, var(--accent-2), var(--accent));
+            color: #fff;
+            padding: 0.56rem 1rem;
+            border-radius: 10px;
+            font-weight: 700;
+            border: none;
+        }
+
+        body.modal-open {
+            overflow: hidden;
+        }
+
+        .material-list::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        .material-list::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 6px;
+        }
+
+        .material-list::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 6px;
+        }
+
+        .material-list::-webkit-scrollbar-thumb:hover {
+            background: #c58eff;
+        }
+
+        .material-list {
+            scrollbar-width: thin;
+            scrollbar-color: var(--accent) rgba(255, 255, 255, 0.03);
+        }
+
+        .stats-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            justify-content: center;
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: var(--muted);
+        }
+
+        .stats-container div span {
+            color: var(--accent);
+            font-weight: 700;
+        }
+
+        .share-btn {
+            background: linear-gradient(135deg, #8b4eff, #b26eff);
+            padding: 0.7rem 1.4rem;
+            font-size: 1rem;
+            font-weight: 700;
+            border-radius: 12px;
+            box-shadow: 0 6px 18px rgba(178, 110, 255, 0.3);
+            transition: all 0.18s ease;
+        }
+
+        .share-btn:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 10px 28px rgba(178, 110, 255, 0.4);
+        }
+
+        .share-btn:active {
+            transform: translateY(1px) scale(0.98);
+            box-shadow: 0 4px 12px rgba(178, 110, 255, 0.2);
+        }
+
+        .share-btn i {
+            margin-right: 0.5rem;
+        }
+
+        #shareBtn {
+            margin-bottom: 1.2rem;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 520px) {
+            .material-left .material-name {
+                max-width: 28ch;
+            }
+
+            .input-group {
+                flex-direction: column;
+            }
+
+            input,
+            textarea,
+            .btn {
+                font-size: 0.88rem;
+                padding: 0.55rem 0.8rem;
+            }
+
+            .icon-btn {
+                min-width: 32px;
+                min-height: 32px;
+                padding: 0.35rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 0.85rem;
+            }
+
+            .material-list {
+                max-height: 45vh;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <h1>Minecraft Material Checklist</h1>
+    <h2>Track your Minecraft build materials</h2>
+
+    <div class="checklist-container">
+        <div class="input-section">
+            <div class="input-group">
+                <input id="materialName" type="text" placeholder="Material name (e.g., Oak Log)" />
+                <input id="materialAmount" type="number" placeholder="Amount" />
+                <button id="addBtn" class="btn"><i class="fa-solid fa-plus"></i> Add</button>
+            </div>
+
+            <textarea id="importList" placeholder="Import list (one per line, e.g. Oak Log - 634)"></textarea>
+            <div style="display:flex;gap:0.6rem;justify-content:flex-end">
+                <button id="importBtn" class="btn"><i class="fa-solid fa-file-import"></i> Import List</button>
+            </div>
+        </div>
+
+        <hr />
+
+        <div class="stats-container" id="statsContainer">
+            <div>Total Items: <span id="totalItems">0</span></div>
+            <div>Completed Items: <span id="completedItems">0</span></div>
+            <div>Remaining Items: <span id="remainingItems">0</span></div>
+            <div>Total Amount: <span id="totalAmount">0</span></div>
+            <div>Total Amount Completed: <span id="amountCompleted">0</span></div>
+            <div>Total Amount Left: <span id="amountLeft">0</span></div>
+        </div>
+        <div style="display:flex;justify-content:center;margin-top:1rem">
+            <button id="shareBtn" class="btn share-btn">
+                <i class="fa-solid fa-share-nodes"></i> Share Checklist
+            </button>
+        </div>
+        <div class="material-list" id="materialList" aria-live="polite"></div>
+    </div>
+
+    <footer style="margin-top:18px;color:#777">Made with ❤️ from eggrial.lol</footer>
+
+    <!-- Edit modal -->
+    <div class="modal" id="editModal" role="dialog" aria-modal="true" aria-hidden="true">
+        <div class="modal-card" role="document">
+            <div class="modal-head">
+                <div class="modal-title"><i class="fa-solid fa-pen-to-square" style="margin-right:8px"></i>Edit material
+                </div>
+                <button class="modal-close" id="modalClose" aria-label="Close dialog">&times;</button>
+            </div>
+
+            <div class="modal-body">
+                <div class="modal-note">Change the name and/or amount — press Enter to save</div>
+                <input id="editName" type="text" placeholder="Material name" />
+                <input id="editAmount" type="number" placeholder="Amount" min="0" />
+            </div>
+
+            <div class="modal-footer">
+                <button class="btn-ghost" id="modalCancel">Cancel</button>
+                <button class="btn-primary" id="modalSave"><i class="fa-solid fa-save"></i> Save</button>
+            </div>
+        </div>
+
+    </div>
+    <div id="copyPopup" style="
+    position: fixed;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%) translateY(0);
+    background: rgba(178, 110, 255, 0.9);
+    color: #fff;
+    padding: 0.6rem 1rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 999;
+">Copied!</div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.4.4/lz-string.min.js"></script>
+    <script>
+        // elements
+        const materialListEl = document.getElementById('materialList');
+        const addBtn = document.getElementById('addBtn');
+        const importBtn = document.getElementById('importBtn');
+        const nameInput = document.getElementById('materialName');
+        const amountInput = document.getElementById('materialAmount');
+        const importArea = document.getElementById('importList');
+
+        const editModal = document.getElementById('editModal');
+        const editName = document.getElementById('editName');
+        const editAmount = document.getElementById('editAmount');
+        const modalClose = document.getElementById('modalClose');
+        const modalCancel = document.getElementById('modalCancel');
+        const modalSave = document.getElementById('modalSave');
+
+        const totalItemsEl = document.getElementById('totalItems');
+        const totalAmountEl = document.getElementById('totalAmount');
+        const completedItemsEl = document.getElementById('completedItems');
+        const remainingItemsEl = document.getElementById('remainingItems');
+        const amountLeftEl = document.getElementById('amountLeft');
+        const amountCompletedEl = document.getElementById('amountCompleted');
+
+        const shareBtn = document.getElementById('shareBtn');
+        const copyPopup = document.getElementById('copyPopup');
+
+        let materials = JSON.parse(localStorage.getItem('materials') || '[]');
+        let editingIndex = null;
+
+        // render
+        function render() {
+            materialListEl.innerHTML = '';
+            materials.forEach((m, idx) => {
+                const item = document.createElement('div');
+                item.className = 'material-item' + (m.checked ? ' checked' : '');
+                item.setAttribute('data-index', idx);
+
+                const left = document.createElement('div');
+                left.className = 'material-left';
+                left.innerHTML = `
+          <input type="checkbox" ${m.checked ? 'checked' : ''} data-idx="${idx}" aria-label="Mark ${m.name} done">
+          <div style="display:flex;flex-direction:column;min-width:0">
+            <div class="material-name">${escapeHtml(m.name)}</div>
+          </div>
+        `;
+
+                const right = document.createElement('div');
+                right.style.display = 'flex';
+                right.style.alignItems = 'center';
+                right.style.gap = '0.8rem';
+
+                const amount = document.createElement('div');
+                amount.className = 'material-amount';
+                amount.textContent = `x${m.amount}`;
+
+                const actions = document.createElement('div');
+                actions.className = 'actions';
+                actions.innerHTML = `
+          <button class="icon-btn edit" title="Edit" data-idx="${idx}"><i class="fa-solid fa-pen-to-square"></i></button>
+          <button class="icon-btn remove" title="Remove" data-idx="${idx}"><i class="fa-solid fa-trash"></i></button>
+        `;
+
+                right.appendChild(amount);
+                right.appendChild(actions);
+
+                item.appendChild(left);
+                item.appendChild(right);
+                materialListEl.appendChild(item);
+            });
+
+            materialListEl.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+                cb.addEventListener('change', e => {
+                    const i = Number(cb.getAttribute('data-idx'));
+                    materials[i].checked = cb.checked;
+                    save();
+                    render();
+                });
+            });
+
+            materialListEl.querySelectorAll('.edit').forEach(btn => {
+                btn.addEventListener('click', e => {
+                    const i = Number(btn.dataset.idx);
+                    openEdit(i);
+                });
+            });
+
+            materialListEl.querySelectorAll('.remove').forEach(btn => {
+                btn.addEventListener('click', e => {
+                    const i = Number(btn.dataset.idx);
+                    materials.splice(i, 1);
+                    save();
+                    render();
+                });
+            });
+            updateStats();
+        }
+
+        function showCopyPopup() {
+            copyPopup.style.opacity = '1';
+            copyPopup.style.transform = 'translateX(-50%) translateY(-10px)';
+            setTimeout(() => {
+                copyPopup.style.opacity = '0';
+                copyPopup.style.transform = 'translateX(-50%) translateY(0)';
+            }, 1500);
+        }
+
+        shareBtn.addEventListener('click', () => {
+            if (!materials.length) return alert('Your checklist is empty.');
+
+            const compressed = LZString.compressToEncodedURIComponent(JSON.stringify(materials));
+            const url = `${window.location.origin}${window.location.pathname}?data=${compressed}`;
+
+            navigator.clipboard.writeText(url)
+                .then(() => showCopyPopup())
+                .catch(() => alert('Failed to copy link.'));
+        });
+
+        const urlParams = new URLSearchParams(window.location.search);
+        const dataParam = urlParams.get('data');
+        if (dataParam) {
+            try {
+                const imported = JSON.parse(LZString.decompressFromEncodedURIComponent(dataParam));
+                if (Array.isArray(imported)) {
+                    materials = imported;
+                    save();
+                    render();
+                }
+            } catch (e) {
+                console.error('Failed to import checklist from URL', e);
+            }
+        }
+
+        function updateStats() {
+            const totalItems = materials.length;
+            const totalAmount = materials.reduce((sum, m) => sum + (parseInt(m.amount) || 0), 0);
+            const completedItems = materials.filter(m => m.checked).length;
+            const remainingItems = totalItems - completedItems;
+            const totalAmountCompleted = materials
+                .filter(m => m.checked)
+                .reduce((sum, m) => sum + (parseInt(m.amount) || 0), 0);
+            const totalAmountLeft = materials
+                .filter(m => !m.checked)
+                .reduce((sum, m) => sum + (parseInt(m.amount) || 0), 0);
+
+            totalItemsEl.textContent = totalItems;
+            totalAmountEl.textContent = totalAmount;
+            completedItemsEl.textContent = completedItems;
+            remainingItemsEl.textContent = remainingItems;
+            amountCompletedEl.textContent = totalAmountCompleted;
+            amountLeftEl.textContent = totalAmountLeft;
+        }
+
+        function save() {
+            localStorage.setItem('materials', JSON.stringify(materials));
+        }
+
+        function escapeHtml(str) {
+            return String(str).replace(/[&<>"'`=\/]/g, s => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;', '/': '&#x2F;', '`': '&#x60;', '=': '&#x3D;' })[s]);
+        }
+
+        function addMaterial() {
+            const name = nameInput.value.trim();
+            const amount = parseInt(amountInput.value);
+            if (!name || isNaN(amount)) return;
+            materials.push({ name, amount, checked: false });
+            save();
+            render();
+            nameInput.value = ''; amountInput.value = '';
+            nameInput.focus();
+        }
+        addBtn.addEventListener('click', addMaterial);
+        [nameInput, amountInput].forEach(el => {
+            el.addEventListener('keydown', e => {
+                if (e.key === 'Enter') { e.preventDefault(); addMaterial(); }
+            });
+        });
+
+        function importMaterials() {
+            const text = importArea.value.trim();
+            if (!text) return;
+            const lines = text.split('\n').map(l => l.trim()).filter(Boolean);
+            lines.forEach(line => {
+                const cleaned = line.replace(/=/g, '-');
+                const parts = cleaned.split('-').map(p => p.trim());
+                if (parts.length >= 2) {
+                    const amt = parseInt(parts.slice(-1)[0]);
+                    const name = parts.slice(0, parts.length - 1).join(' - ');
+                    if (name && !isNaN(amt)) materials.push({ name, amount: amt, checked: false });
+                } else {
+
+                }
+            });
+            importArea.value = '';
+            save();
+            render();
+        }
+        importBtn.addEventListener('click', importMaterials);
+
+        function openEdit(index) {
+            editingIndex = index;
+            const m = materials[index];
+            editName.value = m.name;
+            editAmount.value = m.amount;
+            showModal();
+            setTimeout(() => editName.focus(), 120);
+        }
+
+        function showModal() {
+            editModal.classList.add('show');
+            document.body.classList.add('modal-open');
+            editModal.setAttribute('aria-hidden', 'false');
+            document.addEventListener('keydown', modalKeyHandler);
+        }
+
+        function hideModal() {
+            editModal.classList.remove('show');
+            document.body.classList.remove('modal-open');
+            editModal.setAttribute('aria-hidden', 'true');
+            document.removeEventListener('keydown', modalKeyHandler);
+            editingIndex = null;
+        }
+
+        function modalKeyHandler(e) {
+            if (e.key === 'Escape') { hideModal(); }
+            if (e.key === 'Enter') { e.preventDefault(); modalSaveHandler(); }
+        }
+
+        function modalSaveHandler() {
+            if (editingIndex === null) return hideModal();
+            const name = editName.value.trim();
+            const amt = parseInt(editAmount.value);
+            if (!name || isNaN(amt)) return;
+            materials[editingIndex].name = name;
+            materials[editingIndex].amount = amt;
+            save();
+            hideModal();
+            render();
+        }
+
+        modalClose.addEventListener('click', hideModal);
+        modalCancel.addEventListener('click', hideModal);
+        modalSave.addEventListener('click', modalSaveHandler);
+
+        render();
+
+        window.addMaterial = addMaterial;
+        window.importMaterials = importMaterials;
+        window.openEdit = openEdit;
+        window.removeMaterial = (btn) => { /* kept for backwards compatibility if used */ };
+
+    </script>
+</body>
+</html>
