@@ -526,7 +526,6 @@
 
     <footer style="margin-top:18px;color:#777">Made with ❤️ from eggrial.lol</footer>
 
-    <!-- Edit modal -->
     <div class="modal" id="editModal" role="dialog" aria-modal="true" aria-hidden="true">
         <div class="modal-card" role="document">
             <div class="modal-head">
@@ -567,7 +566,6 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.4.4/lz-string.min.js"></script>
     <script>
-        // elements
         const materialListEl = document.getElementById('materialList');
         const addBtn = document.getElementById('addBtn');
         const importBtn = document.getElementById('importBtn');
@@ -595,7 +593,6 @@
         let materials = JSON.parse(localStorage.getItem('materials') || '[]');
         let editingIndex = null;
 
-        // render
         function render() {
             materialListEl.innerHTML = '';
             materials.forEach((m, idx) => {
@@ -619,7 +616,15 @@
 
                 const amount = document.createElement('div');
                 amount.className = 'material-amount';
-                amount.textContent = `x${m.amount}`;
+
+                // Calculate stacks only if amount > 64
+                const amt = parseInt(m.amount) || 0;
+                let displayText = `x${amt}`;
+                if (amt > 64) {
+                    const stacks = Math.ceil(amt / 64);
+                    displayText += ` (${stacks} stack${stacks > 1 ? 's' : ''})`;
+                }
+                amount.textContent = displayText;
 
                 const actions = document.createElement('div');
                 actions.className = 'actions';
@@ -660,6 +665,7 @@
                     render();
                 });
             });
+
             updateStats();
         }
 
