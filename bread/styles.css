@@ -1,0 +1,280 @@
+:root {
+    --background: #0f0f11;
+    --card: #18181b;
+    --border: #26262a;
+    --text: #f1f1f1;
+    --text-muted: #a1a1aa;
+    --accent: #5865f2;
+    --accent-2: #1d9bf0; 
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Inter, Arial, sans-serif;
+}
+
+body {
+    background: var(--background);
+    color: var(--text);
+    line-height: 1.5;
+}
+
+.navbar {
+    width: 100%;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(10, 10, 12, 0.7);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 99;
+}
+
+.logo {
+    font-size: 26px;
+    font-weight: 700;
+}
+
+.dot {
+    color: var(--accent);
+}
+
+.links a {
+    margin-left: 22px;
+    text-decoration: none;
+    color: var(--text-muted);
+    transition: 0.2s;
+}
+
+.links a:hover,
+.links .active {
+    color: var(--text);
+}
+
+.invite-btn {
+    padding: 8px 14px;
+    background: var(--accent);
+    border-radius: 8px;
+    color: white !important;
+}
+
+.invite-btn:hover {
+    opacity: .85;
+}
+
+.hero {
+    padding: 80px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 40px;
+}
+
+.hero-content {
+    flex: 1;
+}
+
+.hero-content h1 {
+    font-size: 50px;
+    line-height: 1.2;
+}
+
+.hero-content p {
+    margin-top: 18px;
+    max-width: 580px;
+    color: var(--text-muted);
+}
+
+.hero-buttons {
+    margin-top: 30px;
+    display: flex;
+    gap: 16px;
+}
+
+.btn-primary,
+.btn-secondary {
+    padding: 12px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: .2s;
+}
+
+.btn-primary {
+    background: var(--accent);
+    color: white;
+}
+
+.btn-primary:hover {
+    opacity: .85;
+}
+
+.btn-secondary {
+    background: var(--card);
+    border: 1px solid var(--border);
+    color: var(--text);
+}
+
+.btn-secondary:hover {
+    border-color: var(--text-muted);
+}
+
+.hero-art img {
+    width: 480px;
+    border-radius: 12px;
+    border: 2px solid var(--border);
+}
+
+.features {
+    padding: 60px 40px;
+    text-align: center;
+}
+
+.features h2 {
+    font-size: 36px;
+    margin-bottom: 40px;
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+}
+
+.feature-card {
+    background: var(--card);
+    padding: 22px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    text-align: left;
+}
+
+.commands-section {
+    padding: 60px 40px;
+    max-width: 900px;
+    margin: auto;
+}
+
+.commands-section h1 {
+    font-size: 40px;
+    margin-bottom: 10px;
+}
+
+.subtitle {
+    color: var(--text-muted);
+    margin-bottom: 40px;
+}
+
+.cmd-block {
+    background: var(--card);
+    padding: 18px 20px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    margin-bottom: 18px;
+}
+
+.cmd-block h3 {
+    font-size: 20px;
+}
+
+.cmd-block p {
+    color: var(--text-muted);
+    margin-top: 6px;
+}
+
+.footer {
+    padding: 30px;
+    text-align: center;
+    margin-top: 40px;
+    color: var(--text-muted);
+}
+
+@media (max-width: 900px) {
+
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        padding: 50px 20px;
+    }
+
+    .hero-content h1 {
+        font-size: 36px;
+    }
+
+    .hero-content p {
+        margin: 0 auto;
+        max-width: 90%;
+    }
+
+    .hero-buttons {
+        justify-content: center;
+    }
+
+    .hero-art img {
+        width: 80%;
+        max-width: 320px;
+    }
+}
+
+@media (max-width: 700px) {
+
+    .navbar {
+        padding: 18px 20px;
+    }
+
+    .links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        right: 20px;
+        top: 70px;
+        background: rgba(20,20,22,0.95);
+        padding: 15px 20px;
+        border-radius: 10px;
+        border: 1px solid var(--border);
+    }
+
+    .links a {
+        margin: 10px 0;
+    }
+
+    .links.open {
+        display: flex;
+    }
+
+    .menu-btn {
+        display: block !important;
+    }
+}
+
+@media (max-width: 500px) {
+
+    .hero-content h1 {
+        font-size: 30px;
+    }
+
+    .features h2 {
+        font-size: 28px;
+    }
+
+    .cmd-block {
+        padding: 14px 16px;
+    }
+
+    .cmd-block h3 {
+        font-size: 18px;
+    }
+}
+
+.menu-btn {
+    display: none;
+    font-size: 30px;
+    background: none;
+    border: none;
+    color: var(--text);
+    cursor: pointer;
+}
