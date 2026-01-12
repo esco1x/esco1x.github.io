@@ -1,195 +1,581 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Bread Docs - Commands</title>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bread Commands</title>
-    <link rel="stylesheet" href="../styles.css">
-</head>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
 
-<body>
+  <body>
+    <nav class="topbar">
+      <div class="topbar-left">
+        <span class="logo">Bread<span class="dot">.</span></span>
+        <span class="doc-title">Documentation</span>
+      </div>
 
-    <nav class="navbar">
-        <div class="logo">Bread<span class="dot">.</span></div>
-        <div class="links">
-            <a href="https://eggrial.lol/bread/">Home</a>
-            <a href="https://eggrial.lol/bread/commands/" class="active">Commands</a>
-            <a class="invite-btn" href="https://discord.com/oauth2/authorize?client_id=941984809037738005">Invite Bot</a>
-        </div>
-        <button class="menu-btn" onclick="document.querySelector('.links').classList.toggle('open')">
-            ☰
-        </button>
+      <div class="topbar-right">
+        <button class="hamburger">☰</button>
+      </div>
     </nav>
 
-    <section class="commands-section">
-        <h1>Commands</h1>
-        <p class="subtitle">A full list of account, locker, session, and utility commands supported by Bread.</p>
+    <div class="layout">
+      <aside class="sidebar">
+        <h5>COMMANDS</h5>
 
-        <div class="commands-list">
+        <a href="#authentication">Authentication</a>
+        <a href="#account">Account</a>
+        <a href="#game">Game</a>
+        <a href="#ban">Ban</a>
+        <a href="#redeem">Redeem</a>
+        <a href="#creator">Creator Code</a>
+        <a href="#locker">Locker</a>
+        <a href="#friends">Friends</a>
+        <a href="#gifting">Gifting</a>
+        <a href="#vbucks">V-Bucks</a>
+        <a href="#info">Information</a>
+        <a href="#misc">Misc</a>
 
-            <div class="cmd-block">
-                <h3>/login</h3>
-                <p>Login to your Fortnite account.</p>
+        <a href="https://eggrial.lol/bread/" class="home-btn">Home</a>
+        <a
+          href="https://discord.com/oauth2/authorize?client_id=941984809037738005"
+          class="invite-btn"
+          >Invite Bot</a
+        >
+      </aside>
+
+      <main class="content">
+        <header class="page-header">
+          <h1>Commands Reference</h1>
+          <p>A complete reference for all Bread Discord bot commands.</p>
+        </header>
+
+        <section id="authentication">
+          <h2>Authentication</h2>
+
+          <div class="command-block">
+            <div class="command-header">
+              <code>/login</code>
+              <span>Authenticate your Epic Games account.</span>
+            </div>
+          </div>
+
+          <div class="command-block">
+            <div class="command-header">
+              <code>/logout</code>
+              <span>Disconnect your Epic Games account.</span>
+            </div>
+          </div>
+        </section>
+
+        <section id="account">
+          <h2>Account</h2>
+
+          <div class="command-block">
+            <div class="command-header">
+              <code>/account change-displayname</code>
+              <span>Change the display name of your Epic Games account.</span>
             </div>
 
-            <div class="cmd-block">
-                <h3>/logout</h3>
-                <p>Logout from your Fortnite account.</p>
+            <div class="command-args">
+              <h4>Arguments</h4>
+
+              <div class="arg">
+                <code>displayname</code>
+                <span class="required">required</span>
+                <p>The Display Name you want to change to.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="command-block">
+            <div class="command-header">
+              <code>/account information</code>
+              <span
+                >View your Epic Account Information (Sensitive
+                Information)</span
+              >
+            </div>
+          </div>
+
+          <div class="command-block">
+            <div class="command-header">
+              <code>/account lookup</code>
+              <span>Look up a Fortnite account.</span>
             </div>
 
-            <div class="cmd-block">
-                <h3>/locker view</h3>
-                <p>View your locker categories.</p>
+            <div class="command-args">
+              <h4>Arguments</h4>
+
+              <div class="arg">
+                <code>accountid</code>
+                <span class="required">required</span>
+                <p>The Epic Games account ID to look up.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="command-block">
+            <div class="command-header">
+              <code>/account permissions</code>
+              <span
+                >View your Account Permissions for the logged in client (Android
+                Client)</span
+              >
+            </div>
+          </div>
+
+          <div class="command-block">
+            <div class="command-header">
+              <code>/account ranked</code>
+              <span>View your fortnite ranked stats, or someone else.</span>
             </div>
 
-            <div class="cmd-block">
-                <h3>/locker exclusives</h3>
-                <p>View your exclusive cosmetics.</p>
+            <div class="command-args">
+              <h4>Arguments</h4>
+
+              <div class="arg">
+                <code>displayname</code>
+                <span class="optional">optional</span>
+                <p>
+                  Enter an Epic Display Name to display another user's stats.
+                  (You should be able to search anyone's stats regardless of
+                  their privacy settings)
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="command-block">
+            <div class="command-header">
+              <code>/account summary</code>
+              <span>View your fortnite account summary. (e.g Account Level, Season Wins, Season Crowns)</span>
+            </div>
+          </div>
+        </section>
+
+        <section id="game">
+          <h2>Game</h2>
+
+          <div class="command-block">
+            <div class="command-header">
+              <code>/playtime</code>
+              <span>View Fortnite playtime across platforms.</span>
             </div>
 
-            <div class="cmd-block">
-                <h3>/gifts sent</h3>
-                <p>View gifts you’ve sent to others.</p>
+            <div class="command-options">
+              <h4>Interactive Options</h4>
+
+              <div class="option">
+                <span class="badge xbox">Xbox</span>
+                <p>
+                  Prompts optional login options through Xbox if an epic account
+                  isn't available to the user.
+                </p>
+              </div>
+
+              <div class="option">
+                <span class="badge playstation">Playstation</span>
+                <p>
+                  Prompts optional login options through Playstation if an epic
+                  account isn't available to the user.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="command-block">
+            <div class="command-header">
+              <code>/xp</code>
+              <span>View your XP progress for all gamemodes.</span>
+            </div>
+          </div>
+
+          <div class="command-block">
+            <div class="command-header">
+              <code>/ranked-modes</code>
+              <span>Shows the current active ranked tracks in Fortnite.</span>
+            </div>
+          </div>
+          
+          <div class="command-block">
+            <div class="command-header">
+              <code>/island</code>
+              <span>Search for a Fortnite island by it's code.</span>
             </div>
 
-            <div class="cmd-block">
-                <h3>/gifts received</h3>
-                <p>View gifts you've received.</p>
+            <div class="command-args">
+              <h4>Arguments</h4>
+
+              <div class="arg">
+                <code>code</code>
+                <span class="required">required</span>
+                <p>
+                  The island code you want to check.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="command-block">
+            <div class="command-header">
+              <code>/pendingrewards</code>
+              <span>Processes pending rewards for your linked fortnite account. (Like what fortnite does on login if you've ever seen that message)</span>
+            </div>
+          </div>
+
+          <div class="command-block">
+            <div class="command-header">
+              <code>/requestaccess</code>
+              <span>Request access to the Fortnite/Epic APIs if you haven't accepted the EULA/don't have 'PLAY' Action.</span>
+            </div>
+          </div>
+
+          <div class="command-block">
+            <div class="command-header">
+              <code>/session</code>
+              <span>Displays your current fortnite session details.</span>
+            </div>
+          </div>
+
+        </section>
+
+        <section id="ban">
+          <h2>Ban</h2>
+
+          <div class="command-block">
+            <div class="command-header">
+              <code>/checkban account</code>
+              <span>Check if your fortnite account is banned.</span>
+            </div>
+          </div>
+
+          <div class="command-block">
+            <div class="command-header">
+              <code>/checkban social</code>
+              <span>Check if your fortnite account is social banned.</span>
+            </div>
+          </div>
+
+        </section>
+        
+
+        <section id="redeem">
+          <h2>Redeem</h2>
+
+          <div class="command-block">
+            <div class="command-header">
+              <code>/code info</code>
+              <span>View information about a redemption code.</span>
+            </div>
+          </div>
+
+          <div class="command-block">
+            <div class="command-header">
+              <code>/code redeem</code>
+              <span>Redeem a code on your fortnite account.</span>
+            </div>
+          </div>
+
+        </section>
+
+        <section id="creator">
+          <h2>Creator Code</h2>
+
+          <div class="command-block">
+            <div class="command-header">
+              <code>/creator auto-renew</code>
+              <span>Enable or update automatic creator support.</span>
             </div>
 
-            <div class="cmd-block">
-                <h3>/xp</h3>
-                <p>View your XP progress for all gamemodes.</p>
+            <div class="command-args">
+              <h4>Arguments</h4>
+
+              <div class="arg">
+                <code>code</code>
+                <span class="required">required</span>
+                <p>The Support-A-Creator Code you want to auto renew.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="command-block">
+            <div class="command-header">
+              <code>/creator code-info</code>
+              <span>Check a Support-A-Creator Code info.</span>
             </div>
 
-            <div class="cmd-block">
-                <h3>/requestaccess</h3>
-                <p>Request access to the Fortnite APIs if you haven't accepted the EULA.</p>
+            <div class="command-args">
+              <h4>Arguments</h4>
+
+              <div class="arg">
+                <code>code</code>
+                <span class="required">required</span>
+                <p>The Support-A-Creator Code you want to check.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="command-block">
+            <div class="command-header">
+              <code>/creator profile</code>
+              <span>View a Fortnite Creator's profile.</span>
             </div>
 
-            <div class="cmd-block">
-                <h3>/account permissions</h3>
-                <p>View your Epic Games account permissions.</p>
+            <div class="command-args">
+              <h4>Arguments</h4>
+
+              <div class="arg">
+                <code>code</code>
+                <span class="required">required</span>
+                <p>The Support-A-Creator Code you want to check.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="command-block">
+            <div class="command-header">
+              <code>/creator renew-disable</code>
+              <span>Disable automatic Support-A-Creator Code.</span>
+            </div>
+          </div>
+
+        </section>
+
+        <section id="locker">
+          <h2>Locker</h2>
+
+          <div class="command-block">
+            <div class="command-header">
+              <code>/locker view</code>
+              <span>View locker categories.</span>
+            </div>
+          </div>
+
+          <div class="command-block">
+            <div class="command-header">
+              <code>/locker exclusives</code>
+              <span>Show exclusive cosmetics.</span>
+            </div>
+          </div>
+
+          <div class="command-block">
+            <div class="command-header">
+              <code>/estimatedvalue</code>
+              <span>Estimate locker value.</span>
+            </div>
+          </div>
+
+          <div class="command-block">
+            <div class="command-header">
+              <code>/emote pages</code>
+              <span>Shows how many locker pages your emotes take up (8 per page)</span>
+            </div>
+          </div>
+        </section>
+
+        <section id="friends">
+          <h2>Friends</h2>
+
+          <div class="command-block">
+            <div class="command-header">
+              <code>/friends acceptall</code>
+              <span>Accept all incoming friend requests on your Epic Games account.</span>
+            </div>
+          </div>
+
+          <div class="command-block">
+            <div class="command-header">
+              <code>/friends list</code>
+              <span>List all friends on your Epic Games account.</span>
+            </div>
+          </div>
+
+          <div class="command-block">
+            <div class="command-header">
+              <code>/friends removeall</code>
+              <span>Remove all friends.</span>
+            </div>
+          </div>
+
+          <div class="command-block">
+            <div class="command-header">
+              <code>/friends search</code>
+              <span>Search for an Epic Games user in your friends list.</span>
             </div>
 
-            <div class="cmd-block">
-                <h3>/account ranked</h3>
-                <p>View your Fortnite ranked stats.</p>
+            <div class="command-args">
+              <h4>Arguments</h4>
+
+              <div class="arg">
+                <code>username</code>
+                <span class="required">required</span>
+                <p>The epic display name to check.</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="gifting">
+          <h2>Gifting</h2>
+
+          <div class="command-block">
+            <div class="command-header">
+              <code>/gifts sent</code>
+              <span>View sent gifts.</span>
+            </div>
+          </div>
+
+          <div class="command-block">
+            <div class="command-header">
+              <code>/gifts received</code>
+              <span>View received gifts.</span>
+            </div>
+          </div>
+        </section>
+
+        <section id="vbucks">
+          <h2>V-Bucks</h2>
+
+          <div class="command-block">
+            <div class="command-header">
+              <code>/vbucks balance</code>
+              <span>Check V-Bucks balance.</span>
+            </div>
+          </div>
+
+          <div class="command-block">
+            <div class="command-header">
+              <code>/vbucks totalpurchased</code>
+              <span>View your total V-Bucks purchased.</span>
+            </div>
+          </div>
+        </section>
+
+        <section id="info">
+          <h2>Information</h2>
+
+          <div class="command-block">
+            <div class="command-header">
+              <code>/status</code>
+              <span>Fortnite downtime and uptime status.</span>
+            </div>
+          </div>
+
+          <div class="command-block">
+            <div class="command-header">
+              <code>/notifications</code>
+              <span>Manage server notifications. (Notifications for things like epic service updates, new jam tracks, shop tabs, ect)</span>
+            </div>
+          </div>
+
+          <div class="command-block">
+            <div class="command-header">
+              <code>/packoffer</code>
+              <span>Fetch fortnite pack offer details. [Useful if you know what you're doing]</span>
             </div>
 
-            <div class="cmd-block">
-                <h3>/account change-displayname</h3>
-                <p>Change your Epic Games display name.</p>
+            <div class="command-args">
+              <h4>Arguments</h4>
+
+              <div class="arg">
+                <code>appstoreid</code>
+                <span class="required">required</span>
+                <p>The Appstore ID of the pack to check.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="command-block">
+            <div class="command-header">
+              <code>/recentjam</code>
+              <span>Displays the most recently added Jam Track.</span>
+            </div>
+          </div>
+
+          <div class="command-block">
+            <div class="command-header">
+              <code>/reloadpeakccu</code>
+              <span>Shows a graph of the peak CCU for Reload over time.</span>
+            </div>
+          </div>
+
+          <div class="command-block">
+            <div class="command-header">
+              <code>/searchartist</code>
+              <span>Search for all Jam Tracks by an artist.</span>
             </div>
 
-            <div class="cmd-block">
-                <h3>/account information</h3>
-                <p>View sensitive Epic Games account information.</p>
+            <div class="command-args">
+              <h4>Arguments</h4>
+
+              <div class="arg">
+                <code>artist</code>
+                <span class="required">required</span>
+                <p>The name of the artist to check.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="command-block">
+            <div class="command-header">
+              <code>/searchjam</code>
+              <span>Search for a Jam Track by name or artist.</span>
             </div>
 
-            <div class="cmd-block">
-                <h3>/account summary</h3>
-                <p>View your Fortnite account summary.</p>
+            <div class="command-args">
+              <h4>Arguments</h4>
+
+              <div class="arg">
+                <code>query</code>
+                <span class="required">required</span>
+                <p>What Jam Track to search for.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="command-block">
+            <div class="command-header">
+              <code>/shop</code>
+              <span>Send the current Fortnite Item Shop.</span>
+            </div>
+          </div>
+          
+          <div class="command-block">
+            <div class="command-header">
+              <code>/steamprofile</code>
+              <span>Search someone's Steam profile by URL Name or SteamID64. (This is non fortnite related)</span>
             </div>
 
-            <div class="cmd-block">
-                <h3>/session</h3>
-                <p>Check your current Fortnite session details.</p>
+            <div class="command-args">
+              <h4>Arguments</h4>
+
+              <div class="arg">
+                <code>input</code>
+                <span class="required">required</span>
+                <p>Steam ID or URL.</p>
+              </div>
             </div>
+          </div>
 
-            <div class="cmd-block">
-                <h3>/checkban social</h3>
-                <p>Check if your account is socially banned.</p>
-            </div>
+        </section>
+      </main>
+    </div>
 
-            <div class="cmd-block">
-                <h3>/checkban account</h3>
-                <p>Check if your Fortnite account is banned.</p>
-            </div>
+    <script>
+      const sidebar = document.querySelector(".sidebar");
+      const hamburger = document.querySelector(".hamburger");
 
-            <div class="cmd-block">
-                <h3>/creatorlookup</h3>
-                <p>Look up Fortnite Creator profiles.</p>
-            </div>
+      hamburger.addEventListener("click", () => {
+        sidebar.classList.toggle("open");
+      });
 
-            <div class="cmd-block">
-                <h3>/estimatedvalue</h3>
-                <p>Estimate your locker’s total value.</p>
-            </div>
-
-            <div class="cmd-block">
-                <h3>/friends acceptall</h3>
-                <p>Accept all pending friend requests.</p>
-            </div>
-
-            <div class="cmd-block">
-                <h3>/friends list</h3>
-                <p>List all Epic Games friends.</p>
-            </div>
-
-            <div class="cmd-block">
-                <h3>/friends removeall</h3>
-                <p>Remove all friends from your account.</p>
-            </div>
-
-            <div class="cmd-block">
-                <h3>/friends search</h3>
-                <p>Search for a user in your friends list.</p>
-            </div>
-
-            <div class="cmd-block">
-                <h3>/packoffer</h3>
-                <p>Fetch Fortnite pack offer data.</p>
-            </div>
-
-            <div class="cmd-block">
-                <h3>/playtime</h3>
-                <p>View your Fortnite PC playtime.</p>
-            </div>
-
-            <div class="cmd-block">
-                <h3>/ranked-modes</h3>
-                <p>Check active Fortnite ranked tracks.</p>
-            </div>
-
-            <div class="cmd-block">
-                <h3>/redeem</h3>
-                <p>Redeem an Epic Games code.</p>
-            </div>
-
-            <div class="cmd-block">
-                <h3>/pendingrewards</h3>
-                <p>Process pending rewards.</p>
-            </div>
-
-            <div class="cmd-block">
-                <h3>/island</h3>
-                <p>Search for a Fortnite Island code.</p>
-            </div>
-
-            <div class="cmd-block">
-                <h3>/vbucks balance</h3>
-                <p>Check your current V-Bucks balance.</p>
-            </div>
-
-            <div class="cmd-block">
-                <h3>/vbucks totalpurchased</h3>
-                <p>View your total V-Bucks purchased.</p>
-            </div>
-
-            <div class="cmd-block">
-                <h3>/status</h3>
-                <p>Fortnite downtime & uptime status.</p>
-            </div>
-
-        </div>
-    </section>
-
-    <footer class="footer">
-        <p>© 2025 Bread Bot - Not affiliated with Epic Games.</p>
-    </footer>
-
-</body>
-
+      document.addEventListener("click", (e) => {
+        if (!sidebar.contains(e.target) && !hamburger.contains(e.target)) {
+          sidebar.classList.remove("open");
+        }
+      });
+    </script>
+  </body>
 </html>
