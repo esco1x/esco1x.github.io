@@ -1,0 +1,374 @@
+:root {
+    --background: #0f0f11;
+    --sidebar-bg: #18181b;
+    --border: #26262a;
+    --text: #f1f1f1;
+    --text-muted: #a1a1aa;
+    --accent: #5865f2;
+    --accent-2: #1d9bf0;
+    --button-bg: #1d1d1f;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Inter, Arial, sans-serif;
+}
+
+body {
+    background: var(--background);
+    color: var(--text);
+    line-height: 1.6;
+}
+
+/* --- Topbar --- */
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 40px;
+    background: rgba(10,10,12,0.8);
+    backdrop-filter: blur(10px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.topbar-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo {
+    font-size: 26px;
+    font-weight: 700;
+}
+
+.dot {
+    color: var(--accent);
+}
+
+.doc-title {
+    font-size: 16px;
+    color: var(--text-muted);
+}
+
+.topbar-right a {
+    text-decoration: none;
+    color: var(--text);
+    margin-left: 16px;
+    padding: 6px 12px;
+    border-radius: 6px;
+    background: var(--accent);
+    font-weight: 500;
+    transition: 0.2s;
+}
+
+.topbar-right a:hover {
+    opacity: 0.85;
+}
+
+/* --- Layout --- */
+.layout {
+    display: flex;
+    max-width: 1280px;
+    margin: auto;
+    padding: 40px;
+    gap: 40px;
+}
+
+/* --- Sidebar --- */
+.sidebar {
+    width: 220px;
+    background: var(--sidebar-bg);
+    padding: 20px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    position: sticky;
+    top: 80px;
+    height: fit-content;
+}
+
+.sidebar h5 {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+}
+
+.sidebar a {
+    text-decoration: none;
+    color: var(--text-muted);
+    font-size: 14px;
+    padding: 8px 10px;
+    border-radius: 6px;
+    transition: 0.2s;
+}
+
+.sidebar a:hover {
+    background: var(--button-bg);
+    color: var(--text);
+}
+
+/* Home button */
+.sidebar .home-btn {
+    font-weight: 600;
+    background: var(--accent);
+    color: white !important;
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+/* Invite button */
+.sidebar .invite-btn {
+    font-weight: 500;
+    background: var(--accent-2);
+    color: white !important;
+    text-align: center;
+    margin-bottom: 12px;
+}
+
+/* --- Content --- */
+.content {
+    flex: 1;
+    max-width: 760px;
+}
+
+/* Page header */
+.page-header {
+    margin-bottom: 32px;
+}
+
+.page-header h1 {
+    font-size: 32px;
+    margin-bottom: 6px;
+}
+
+.page-header p {
+    color: var(--text-muted);
+    max-width: 500px;
+}
+
+/* Sections */
+.content section {
+    margin-bottom: 48px;
+    scroll-margin-top: 100px; /* so anchor doesn't hide behind topbar */
+}
+
+.content h2 {
+    font-size: 22px;
+    margin-bottom: 16px;
+}
+
+/* Command entries */
+.command {
+    background: var(--sidebar-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 16px;
+    margin-bottom: 12px;
+}
+
+.command code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    color: var(--accent-2);
+    display: block;
+    margin-bottom: 4px;
+}
+
+.command span {
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+/* --- Hamburger button for mobile --- */
+.hamburger {
+    display: none; /* hidden on desktop */
+    font-size: 28px;
+    background: none;
+    border: none;
+    color: var(--text);
+    cursor: pointer;
+    margin-left: 12px;
+}
+
+/* --- Mobile styles --- */
+@media (max-width: 900px) {
+    .layout {
+        flex-direction: column;
+        padding: 20px;
+        gap: 24px;
+    }
+
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: -280px;
+        height: 100%;
+        z-index: 200;
+        transition: left 0.25s ease;
+    }
+
+    .sidebar.open {
+        left: 0;
+    }
+
+    .hamburger {
+        display: block;
+    }
+
+    .topbar-right {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+    }
+
+    .topbar-right a {
+        display: none; /* hide buttons on mobile, now in sidebar */
+    }
+
+    .content {
+        width: 100%;
+    }
+}
+
+
+.command-block {
+    padding: 18px 0;
+    border-top: 1px solid var(--border);
+}
+
+.command-header code {
+    display: block;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 14px;
+    color: var(--accent);
+    margin-bottom: 4px;
+}
+
+.command-header span {
+    color: var(--text-muted);
+    font-size: 14px;
+}
+
+
+/* ============================= */
+/* Command internals (shared) */
+/* ============================= */
+
+.command-args,
+.command-options {
+    margin-top: 14px;
+    margin-left: 12px;
+    padding-left: 14px;
+    border-left: 2px solid var(--border);
+}
+
+
+/* Section headers inside command */
+.command-args h4,
+.command-options h4 {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin-bottom: 10px;
+}
+
+
+/* ============================= */
+/* Arguments */
+/* ============================= */
+
+.arg {
+    padding: 8px 10px;
+    margin-bottom: 8px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.025);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.arg code {
+    font-size: 13px;
+    color: var(--accent-2);
+}
+
+.arg p {
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-top: 4px;
+}
+
+
+/* Badges */
+.required,
+.optional {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 6px;
+    border-radius: 6px;
+    margin-left: 6px;
+}
+
+.required {
+    background: rgba(239, 68, 68, 0.15);
+    color: #ef4444;
+}
+
+.optional {
+    background: rgba(59, 130, 246, 0.15);
+    color: #60a5fa;
+}
+
+
+/* ============================= */
+/* Interactive Options */
+/* ============================= */
+
+.command-options .option {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    margin-bottom: 8px;
+    border-radius: 6px;
+    background: rgba(255, 255, 255, 0.025);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.command-options .option p {
+    margin: 0;
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.4;
+}
+
+
+/* Platform badges */
+.command-options .badge {
+    flex-shrink: 0;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 7px;
+    border-radius: 5px;
+    background: #374151;
+    color: #e5e7eb;
+}
+
+.command-options .badge.xbox {
+    background: #107c10;
+    color: #ffffff;
+}
+
+.command-options .badge.playstation {
+    background: #003087;
+    color: #ffffff;
+}
