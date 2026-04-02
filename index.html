@@ -2,65 +2,295 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Egg's API Documentation</title>
-  <link rel="stylesheet" href="./home.css"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Fortnite leaks, projects, and socials from @eggrial." />
+  <title>eggrial</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0f0f10;
+      --surface: #18181a;
+      --surface-hover: #1f1f22;
+      --border: #2c2c30;
+      --border-hover: #3d3d42;
+      --text: #ededed;
+      --muted: #94949a;
+      --focus: #e4e4e7;
+      --radius: 12px;
+      --safe-bottom: max(1.25rem, env(safe-area-inset-bottom));
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100dvh;
+      font-family: "DM Sans", system-ui, -apple-system, sans-serif;
+      font-size: 15px;
+      line-height: 1.5;
+      color: var(--text);
+      background: var(--bg);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .wrap {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 2rem 1.25rem var(--safe-bottom);
+    }
+
+    .profile {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+
+    .avatar {
+      width: 88px;
+      height: 88px;
+      margin: 0 auto 1rem;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      background: var(--surface);
+    }
+
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .name {
+      font-size: clamp(1.375rem, 4vw, 1.625rem);
+      font-weight: 600;
+      letter-spacing: -0.03em;
+      margin: 0 0 0.4rem;
+      line-height: 1.2;
+    }
+
+    .tagline {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.875rem;
+      max-width: 30ch;
+      margin-inline: auto;
+      line-height: 1.45;
+    }
+
+    .links-primary {
+      display: flex;
+      flex-direction: column;
+      gap: 0.55rem;
+    }
+
+    .link-card {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      padding: 0.95rem 1.05rem;
+      border-radius: var(--radius);
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: inherit;
+      text-decoration: none;
+      transition: background 0.15s ease, border-color 0.15s ease;
+    }
+
+    .link-card:hover {
+      background: var(--surface-hover);
+      border-color: var(--border-hover);
+    }
+
+    .link-card:focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    .link-icon {
+      flex-shrink: 0;
+      width: 40px;
+      height: 40px;
+      border-radius: 9px;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      display: grid;
+      place-items: center;
+    }
+
+    .link-icon svg {
+      width: 20px;
+      height: 20px;
+      opacity: 0.92;
+    }
+
+    .link-body {
+      flex: 1;
+      min-width: 0;
+      text-align: left;
+    }
+
+    .link-title {
+      font-weight: 600;
+      font-size: 0.95rem;
+      margin: 0;
+    }
+
+    .link-sub {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin: 0.2rem 0 0;
+      line-height: 1.35;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      overflow: hidden;
+    }
+
+    .links-secondary-label {
+      margin: 1.15rem 0 0.5rem;
+      text-align: center;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .links-secondary {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.4rem;
+    }
+
+    .link-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.42rem 0.72rem;
+      font-size: 0.74rem;
+      font-weight: 500;
+      color: var(--text);
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      text-decoration: none;
+      transition: background 0.15s ease, border-color 0.15s ease;
+    }
+
+    .link-chip:hover {
+      background: var(--surface);
+      border-color: var(--border-hover);
+    }
+
+    .link-chip:focus-visible {
+      outline: 2px solid var(--focus);
+      outline-offset: 2px;
+    }
+
+    .link-chip svg {
+      width: 14px;
+      height: 14px;
+      flex-shrink: 0;
+      opacity: 0.9;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 1.75rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.72rem;
+    }
+  </style>
 </head>
 <body>
-  <header class="header">
-    <h1>Egg's API Documentation</h1>
-    <p class="tagline">
-      The largest collection of API docs for Fortnite, Roblox, Valorant, Steam, and more.
-    </p>
-  </header>
-
-  <main class="main-content">
-    <section class="about">
-      <h2>About This Site</h2>
-      <p>
-        Welcome to Egg's API Documentation a massive resource covering detailed integrations, guides, and examples across multiple ecosystems. Whether you're building bots, apps, or custom tools, you'll find what you need here.
-      </p>
-    </section>
-
-    <section class="features">
-      <h2>What You'll Find</h2>
-      <ul>
-        <li>Over 200 documented endpoints</li>
-        <li>Request & response code examples</li>
-        <li>Authentication workflows for OAuth & tokens</li>
-        <li>Dynamic search & filtering</li>
-        <li>Linked documentation for seamless navigation</li>
-        <li>Guides for Fortnite, Roblox, Valorant, Steam, and more</li>
-      </ul>
-    </section>
-
-    <section class="getting-started">
-      <h2>Get Started</h2>
-      <p>
-        Dive into the main documentation viewer to explore everything in one place.
-      </p>
-      <a href="docs/" class="enter-button">Enter Documentation</a>
-      <a href="stats.html" class="enter-button">View Documentation Stats</a>
-    </section>
-
-    <section class="socials">
-      <h2>Connect with Me</h2>
-      <p>
-        Follow @Eggrial on your favorite platforms:
-      </p>
-      <div class="social-links">
-        <a href="https://twitter.com/Eggrial" target="_blank">Twitter</a>
-        <a href="https://instagram.com/Eggrial" target="_blank">Instagram</a>
-        <a href="https://fortnite.com/@eggyy" target="_blank">Fortnite</a>
-        <a href="https://youtube.com/@Eggrial" target="_blank">YouTube</a>
+  <main class="wrap">
+    <header class="profile">
+      <div class="avatar">
+        <img src="pfp.png" alt="eggrial" width="88" height="88" />
       </div>
+      <h1 class="name">eggrial</h1>
+      <p class="tagline">I dabble in Fortnite Leaks from time to time & I code things around video games.</p>
+    </header>
+
+    <section class="links-primary" aria-label="Main links">
+      <a class="link-card" href="https://discord.gg/RfzEdPXA4R" target="_blank" rel="noopener noreferrer">
+        <span class="link-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+        </span>
+        <span class="link-body">
+          <p class="link-title">Fortnite Leaks Discord</p>
+          <p class="link-sub">discord.gg/RfzEdPXA4R</p>
+        </span>
+      </a>
+
+      <a class="link-card" href="https://www.twitch.tv/eggrial" target="_blank" rel="noopener noreferrer">
+        <span class="link-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M11.571 4.714h1.715v5.143H11.57zm4.715 0H18v5.143h-1.714zM6 0L1.714 4.286v15.428h5.143V24l4.286-4.286h3.428L22.286 12V0zm14.571 11.143l-3.428 3.428h-3.429l-3 3v-3H6.857V1.714h13.714z"/></svg>
+        </span>
+        <span class="link-body">
+          <p class="link-title">Twitch</p>
+          <p class="link-sub">@eggrial. Not streaming right now; follow if that changes.</p>
+        </span>
+      </a>
+
+      <a class="link-card" href="https://www.tiktok.com/@eggrial" target="_blank" rel="noopener noreferrer">
+        <span class="link-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
+        </span>
+        <span class="link-body">
+          <p class="link-title">TikTok</p>
+          <p class="link-sub">@eggrial</p>
+        </span>
+      </a>
+
+      <a class="link-card" href="https://x.com/eggrial" target="_blank" rel="noopener noreferrer">
+        <span class="link-icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        </span>
+        <span class="link-body">
+          <p class="link-title">X</p>
+          <p class="link-sub">@eggrial</p>
+        </span>
+      </a>
     </section>
+
+    <p class="links-secondary-label">Also</p>
+    <nav class="links-secondary" aria-label="More links">
+      <a class="link-chip" href="https://github.com/esco1x"_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+        GitHub
+      </a>
+      <a class="link-chip" href="https://discord.com/oauth2/authorize?client_id=941984809037738005" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 8v8M8 12h8"/></svg>
+        Bread bot
+      </a>
+      <a class="link-chip" href="https://www.youtube.com/@eggrial" target="_blank" rel="noopener noreferrer">
+        <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+        YouTube
+      </a>
+    </nav>
+
+    <footer class="footer">
+      <p>© <span id="year"></span> eggrial</p>
+    </footer>
   </main>
 
-  <footer class="footer">
-    <p>
-      &copy; 2025 Egg. All rights reserved.
-    </p>
-  </footer>
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+  </script>
 </body>
 </html>
