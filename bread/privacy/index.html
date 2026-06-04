@@ -7,321 +7,190 @@
   <meta property="og:type" content="article">
   <meta property="og:site_name" content="Bread Bot">
   <meta property="og:title" content="Bread Bot - Privacy Policy">
-  <meta property="og:description" content="Bread Bot Privacy Policy - How we collect, use, and protect user data.">
+  <meta property="og:description" content="How Bread Bot collects, uses, and stores Discord, Epic Games, and Steam data.">
   <meta property="og:url" content="https://eggrial.lol/bread/privacy/">
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background: radial-gradient(circle at top, #0f0f0f 0%, #050505 100%);
-      color: #e6e6e6;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
-      padding: 3rem 1rem;
-    }
-
-    h1 {
-      font-weight: 700;
-      font-size: 2.8rem;
-      color: #b26eff;
-      margin-bottom: 0.5rem;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      text-shadow: 0 0 15px rgba(178, 110, 255, 0.4);
-    }
-
-    h2 {
-      font-weight: 400;
-      font-size: 1rem;
-      color: #aaa;
-      margin-bottom: 2rem;
-      letter-spacing: 0.5px;
-    }
-
-    .tos-container {
-      width: 100%;
-      max-width: 850px;
-      background: rgba(20, 20, 20, 0.85);
-      border: 1px solid rgba(178, 110, 255, 0.2);
-      border-radius: 15px;
-      box-shadow: 0 0 25px rgba(178, 110, 255, 0.05);
-      padding: 2rem 2.5rem;
-      animation: fadeIn 0.6s ease forwards;
-    }
-
-    h3 {
-      color: #b26eff;
-      font-weight: 600;
-      font-size: 1.4rem;
-      margin-top: 2rem;
-      text-shadow: 0 0 8px rgba(178, 110, 255, 0.4);
-    }
-
-    p, li {
-      color: #dcdcdc;
-      line-height: 1.7;
-      font-size: 0.98rem;
-    }
-
-    ul {
-      margin: 0.8rem 0 0.8rem 1.5rem;
-    }
-
-    a {
-      color: #b26eff;
-      text-decoration: none;
-      font-weight: 500;
-    }
-
-    footer {
-      margin-top: 2.5rem;
-      font-size: 0.85rem;
-      color: #777;
-      text-align: center;
-    }
-
-    blockquote {
-      background: rgba(255, 255, 255, 0.03);
-      border-left: 4px solid #b26eff;
-      padding: 0.8rem 1.2rem;
-      color: #ccc;
-      font-style: italic;
-      margin: 1rem 0;
-    }
-
-    hr {
-      border: none;
-      height: 1px;
-      background: rgba(178, 110, 255, 0.15);
-      margin: 1.5rem 0;
-    }
-
-    .highlight-section {
-      border: 2px solid rgba(178, 110, 255, 0.5);
-      box-shadow: 0 0 25px rgba(178, 110, 255, 0.2);
-      border-radius: 10px;
-      background: rgba(178, 110, 255, 0.05);
-      padding: 1rem;
-      transition: all 1s ease;
-    }
-  </style>
+  <link rel="stylesheet" href="../legal.css">
 </head>
-
 <body>
+  <div class="wrap">
+    <header class="site-head">
+      <h1>Bread Bot</h1>
+      <p class="doc-title">Privacy Policy</p>
+      <nav class="site-nav" aria-label="Legal pages">
+        <a href="https://eggrial.lol/bread/privacy/">Privacy Policy</a>
+        <a href="https://eggrial.lol/bread/terms/">Terms of Service</a>
+      </nav>
+      <p class="meta">
+        <strong>Effective:</strong> 5th of May 2025 &nbsp;·&nbsp;
+        <strong>Last updated:</strong> 5th of June 2026
+      </p>
+    </header>
 
-  <h1>Bread Bot</h1>
-  <h2>Privacy Policy</h2>
+    <article>
+      <p class="lead">
+        Bread Bot is a Discord bot for Fortnite-related tools and optional Steam account features.
+        This policy describes what we collect, why we need it, and how you can remove it.
+      </p>
 
-  <div class="tos-container">
+      <section id="collect">
+        <h2>1. Information we collect</h2>
+        <p>Depending on which commands you use, we may process:</p>
 
-    <p>
-      <strong>Effective Date:</strong> 05/05/2025<br>
-      <strong>Last Updated:</strong> 20/12/2025
-    </p>
-
-    <p>
-      Bread Bot ("we", "us", or "our") is a Discord bot designed to provide Fortnite-related
-      functionality, including account management, cosmetic viewing, playtime statistics,
-      and informational updates. This Privacy Policy explains how user data is collected,
-      used, and protected.
-    </p>
-
-    <hr>
-
-    <h3>1. Information We Collect</h3>
-    <p>When you use Bread Bot, we may collect the following information:</p>
-    <ul>
-      <li><strong>Discord Information</strong>
+        <h3>Discord</h3>
         <ul>
-          <li>Your Discord User ID (used to associate data with your account)</li>
+          <li>Your Discord user ID (to link stored data to your account)</li>
+          <li>Server and channel IDs when you run commands or enable notifications there</li>
         </ul>
-      </li>
 
-      <li><strong>Epic Games Authentication Data</strong>
+        <h3>Epic Games (Fortnite)</h3>
         <ul>
-          <li>Device ID</li>
-          <li>Account ID</li>
-          <li>Device secret</li>
-          <li>Display Name</li>
+          <li>Device ID, account ID, device secret, and display name from Epic’s device authentication flow</li>
+          <li>Authorization codes you submit in Discord, only for completing login and not kept after that step finishes</li>
+        </ul>
+
+        <h3>Steam (optional)</h3>
+        <p>
+          Steam features are opt-in. You link an account through <code>/steam login</code>.
+          If you do, we may store:
+        </p>
+        <ul>
+          <li>Steam account name and SteamID64 (when available after login)</li>
+          <li>Encrypted session tokens (refresh and/or access), depending on whether you choose “Remember”</li>
+          <li>Session type (persistent remembered login vs one-off session)</li>
+          <li>Display name and avatar URL for the linked account, when returned by Steam</li>
         </ul>
         <p>
-          This data is required to authenticate your Fortnite account using Epic Games'
-          official device authentication system.
+          We do <strong>not</strong> store your Steam password. Login uses Valve’s authentication flow
+          (including Steam Guard when required).
         </p>
-      </li>
 
-      <li>
-        Authorization codes submitted through Discord. These are only used when strictly
-        necessary and are not retained beyond the authentication process.
-      </li>
-    </ul>
+        <h3>Xbox and PlayStation (Fortnite playtime only)</h3>
+        <ul>
+          <li>OAuth is used only to run the Fortnite <strong>playtime</strong> command</li>
+          <li>Platform tokens are not stored; they are discarded when the command finishes</li>
+        </ul>
+      </section>
 
-    <hr>
+      <section id="steam-use">
+        <h2>2. How Steam data is used</h2>
+        <p>When you use <code>/steam</code> subcommands, the bot may request data from Steam on your behalf, including:</p>
+        <ul>
+          <li>Profile summary (name, avatar, online status, visibility)</li>
+          <li>Friends list and basic friend presence</li>
+          <li>Owned games and playtime (including recent playtime where visible)</li>
+          <li>Per-game breakdown for a specific app ID: playtime, live status, achievements, and game stats</li>
+        </ul>
+        <p>
+          Most of this comes from Valve’s public Web APIs using a server-side API key.
+          If your profile or game stats are private, some fields may be empty or unavailable.
+          For linked accounts with a valid remembered session, the bot may also request your own
+          stats and achievements through an authenticated Steam client connection when the public API cannot return them.
+        </p>
+        <div class="note">
+          <strong>Your Steam privacy settings matter.</strong>
+          Game details, friend lists, and game stats must be visible to Steam (and often set to Public)
+          for the bot to show them. We cannot override Valve’s privacy rules.
+        </div>
+        <p>
+          Bread Bot is not affiliated with, endorsed by, or sponsored by Valve or Steam.
+        </p>
+      </section>
 
-    <h3>2. Platform Authentication (Xbox & PlayStation)</h3>
-    <p>
-      Bread Bot provides optional Xbox and PlayStation login functionality for the
-      <strong>playtime</strong> command.
-    </p>
-    <ul>
-      <li>Authentication is performed using official Microsoft and Sony OAuth flows.</li>
-      <li>Access tokens are generated only for the duration of the requested command.</li>
-      <li><strong>No Xbox or PlayStation credentials, access tokens, or refresh tokens are stored.</strong></li>
-      <li>All platform authentication data is discarded immediately after use.</li>
-    </ul>
-    <p>
-      Bread Bot does not maintain persistent sessions, background refresh jobs, or long-term
-      access to Xbox or PlayStation accounts.
-    </p>
+      <section id="use">
+        <h2>3. How we use your data</h2>
+        <p>Data is used only to:</p>
+        <ul>
+          <li>Run commands you request in Discord</li>
+          <li>Keep your linked Fortnite and/or Steam accounts associated with your Discord user</li>
+          <li>Send opt-in server notifications (Jam Tracks, item shop, passes, Epic services, etc.)</li>
+        </ul>
+        <p>We do not sell, rent, or trade your data.</p>
+      </section>
 
-    <hr>
+      <section id="fortnite-leaks">
+        <h2>4. Fortnite pre-release content</h2>
+        <p>
+          The bot may show unreleased or upcoming Fortnite cosmetics and related metadata from Epic’s
+          public endpoints. This is passive collection for display only, not data you provide.
+        </p>
+      </section>
 
-    <h3>3. How We Use Your Data</h3>
-    <p>Your data is used exclusively to:</p>
-    <ul>
-      <li>Authenticate Fortnite accounts through Epic Games</li>
-      <li>Allow multiple Fortnite accounts to be linked to a single Discord user</li>
-      <li>Provide requested Fortnite-related features and statistics</li>
-    </ul>
-    <p>
-      We do <strong>not</strong> sell, rent, share, or transfer your data to any third parties.
-    </p>
+      <section id="notifications">
+        <h2>5. Notifications</h2>
+        <p>
+          Notification settings are per Discord server and opt-in. You can turn categories on or off
+          (for example Jam Tracks, item shop, passes, Epic services).
+        </p>
+      </section>
 
-    <hr>
+      <section id="security">
+        <h2>6. Security</h2>
+        <p>
+          Sensitive tokens are stored encrypted where applicable. No system is perfectly secure;
+          use the bot at your own discretion and do not share login codes or tokens with anyone.
+        </p>
+      </section>
 
-    <h3>4. Fortnite Pre-Release / Unreleased Content</h3>
-    <p>
-      Bread Bot may display information about unreleased or pre-release Fortnite content
-      ("leaks") that is accessible through Epic Games' publicly available endpoints.
-    </p>
-    <ul>
-      <li>Cosmetics not yet available in-game</li>
-      <li>Jam Track data</li>
-      <li>Shop or pass assets marked for future use</li>
-    </ul>
-    <p>
-      This information is collected passively and is provided strictly for informational
-      purposes.
-    </p>
+      <section id="retention">
+        <h2>7. Retention and deletion</h2>
+        <ul>
+          <li>Epic device auth data is removed when you use Fortnite <code>/logout</code> (or equivalent logout flow).</li>
+          <li>Steam session data is removed when you use <code>/steam logout</code> for that account or all accounts.</li>
+          <li>Xbox and PlayStation auth data from playtime commands is never retained.</li>
+          <li>You may ask for manual deletion of your stored data by contacting us (see below).</li>
+        </ul>
+      </section>
 
-    <hr>
+      <section id="children">
+        <h2>8. Children’s privacy</h2>
+        <p>
+          The bot is not directed at children under 13. If you believe a child has linked an account,
+          contact us and we will delete associated data.
+        </p>
+      </section>
 
-    <h3>5. Notification Preferences</h3>
-    <p>
-      You may enable or disable notifications for specific update categories, including:
-    </p>
-    <ul>
-      <li>Jam Track updates</li>
-      <li>Item Shop updates</li>
-      <li>Pass updates</li>
-      <li>Epic services updates</li>
-    </ul>
-    <p>
-      Notification preferences are saved per Discord server and are fully opt-in.
-    </p>
+      <section id="contact">
+        <h2>9. Contact</h2>
+        <p>
+          Questions about this policy: <code>@eggrial</code> on Discord or the
+          <a href="https://discord.gg/RfzEdPXA4R" target="_blank" rel="noopener noreferrer">support server</a>.
+        </p>
+      </section>
 
-    <hr>
+      <section id="transparency">
+        <h2>10. Credentials and third parties</h2>
+        <p>
+          Do not paste Steam Guard codes, Epic codes, or session tokens into other services.
+          Bread Bot only uses credentials to perform actions you trigger in Discord.
+        </p>
+        <p>
+          Third-party services involved may include Discord, Epic Games, Valve/Steam, Microsoft, and Sony,
+          each under their own terms and privacy policies.
+        </p>
+      </section>
+    </article>
 
-    <h3>6. Data Security</h3>
-    <p>
-      User data is stored using reasonable security measures, including encryption and
-      access controls. While we take steps to protect stored data, no system can guarantee
-      absolute security.
-    </p>
-
-    <hr>
-
-    <h3>7. Data Retention and Deletion</h3>
-    <ul>
-      <li>
-        Epic Games device authentication data is retained until you use the
-        <code>/logout</code> command.
-      </li>
-      <li>
-        Xbox and PlayStation authentication data is never retained.
-      </li>
-      <li>
-        You may request manual deletion of all associated data at any time.
-      </li>
-    </ul>
-
-    <hr>
-
-    <h3>8. Children’s Privacy</h3>
-    <p>
-      Bread Bot is not intended for use by individuals under the age of 13. If you believe
-      a child has used the bot, please contact us so their data can be removed.
-    </p>
-
-    <hr>
-
-    <h3>9. Contact</h3>
-    <p>
-      For questions or concerns regarding this Privacy Policy, please contact the developer
-      or join the support server:
-      <br>
-      <code>@eggrial</code> |
-      <a href="https://discord.gg/RfzEdPXA4R" target="_blank">Support Server</a>
-    </p>
-
-    <hr>
-
-    <h3>10. Data Usage Transparency</h3>
-    <blockquote>
-      “Do not share authentication codes or tokens with third-party services. These credentials
-      allow access to your account.”
-    </blockquote>
-    <p>
-      Bread Bot only uses authentication credentials to perform actions explicitly requested
-      by the user. Credentials are never reused, shared, or accessed outside the scope of the
-      bot’s functionality.
-    </p>
-
+    <footer class="site-foot">
+      © 2025–2026 eggrial.lol · Bread Bot
+    </footer>
   </div>
-
-  <footer>© 2025 eggrial.lol (Bread Bot Developer). All rights reserved.</footer>
 
   <script>
     document.addEventListener("DOMContentLoaded", () => {
-      const params = new URLSearchParams(window.location.search);
-      const sectionNum = parseInt(params.get("section"), 10);
-
-      if (!Number.isInteger(sectionNum) || sectionNum < 1) return;
-
-      const headings = document.querySelectorAll(".tos-container h3");
-      const index = sectionNum - 1;
-      const current = headings[index];
-      const next = headings[index + 1];
-
-      if (!current) return;
-
-      const content = [];
-      let node = current.nextElementSibling;
-      while (node && node !== next) {
-        content.push(node);
-        node = node.nextElementSibling;
-      }
-
-      const wrapper = document.createElement("div");
-      wrapper.className = "highlight-section";
-
-      current.parentNode.insertBefore(wrapper, current);
-      wrapper.appendChild(current);
-      content.forEach(el => wrapper.appendChild(el));
-
-      wrapper.scrollIntoView({ behavior: "smooth", block: "center" });
-
-      setTimeout(() => {
-        wrapper.style.background = "transparent";
-        wrapper.style.boxShadow = "none";
-        wrapper.style.borderColor = "rgba(178, 110, 255, 0.1)";
-      }, 5000);
+      const n = parseInt(new URLSearchParams(location.search).get("section"), 10);
+      if (!Number.isInteger(n) || n < 1) return;
+      const sections = document.querySelectorAll("article section");
+      const target = sections[n - 1];
+      if (!target) return;
+      const h = target.querySelector("h2");
+      if (!h) return;
+      const box = document.createElement("div");
+      box.className = "highlight-section";
+      target.parentNode.insertBefore(box, target);
+      box.appendChild(target);
+      box.scrollIntoView({ behavior: "smooth", block: "start" });
+      setTimeout(() => box.classList.add("faded"), 5000);
     });
   </script>
-
 </body>
 </html>
