@@ -1,0 +1,160 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+  font-size: 1rem;
+  line-height: 1.65;
+  color: #d6d6dc;
+  background: #0b0b0d;
+}
+
+a {
+  color: #b794f4;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+a:hover {
+  color: #d4b8ff;
+}
+
+.wrap {
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 2.5rem 1.25rem 3rem;
+}
+
+.site-head {
+  margin-bottom: 2rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid #252528;
+}
+
+.site-head h1 {
+  margin: 0 0 0.2rem;
+  font-size: 1.75rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: #f2f2f4;
+}
+
+.site-head .doc-title {
+  margin: 0;
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: #9b9ba3;
+}
+
+.site-nav {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+.site-nav a {
+  margin-right: 1rem;
+}
+
+.meta {
+  margin: 1.25rem 0 0;
+  font-size: 0.88rem;
+  color: #8a8a94;
+}
+
+.meta strong {
+  color: #a8a8b0;
+  font-weight: 500;
+}
+
+.lead {
+  margin: 1.5rem 0 0;
+  color: #c4c4cc;
+}
+
+article section {
+  margin-top: 2rem;
+}
+
+article h2 {
+  margin: 0 0 0.65rem;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #ececf0;
+}
+
+article h3 {
+  margin: 1.1rem 0 0.4rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #d8d8e0;
+}
+
+article p {
+  margin: 0.5rem 0 0;
+}
+
+article ul {
+  margin: 0.5rem 0 0;
+  padding-left: 1.35rem;
+}
+
+article li {
+  margin-top: 0.35rem;
+}
+
+article li ul {
+  margin-top: 0.25rem;
+}
+
+.note {
+  margin-top: 0.75rem;
+  padding: 0.85rem 1rem;
+  background: #141418;
+  border: 1px solid #2a2a30;
+  border-radius: 6px;
+  font-size: 0.92rem;
+  color: #b8b8c0;
+}
+
+.note strong {
+  color: #dddde4;
+}
+
+code {
+  font-family: ui-monospace, "Cascadia Code", Consolas, monospace;
+  font-size: 0.88em;
+  padding: 0.1em 0.35em;
+  background: #1a1a1f;
+  border-radius: 4px;
+  color: #e0d4f5;
+}
+
+.site-foot {
+  margin-top: 2.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid #252528;
+  font-size: 0.85rem;
+  color: #6e6e78;
+  text-align: center;
+}
+
+.highlight-section {
+  border-radius: 8px;
+  border: 1px solid #3d3550;
+  background: #12121a;
+  padding: 0.25rem 1rem 1rem;
+  transition: border-color 0.8s ease, background 0.8s ease;
+}
+
+.highlight-section.faded {
+  border-color: #2a2a30;
+  background: transparent;
+}
