@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="referrer" content="no-referrer">
+  <meta name="robots" content="noindex, nofollow">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'none'; base-uri 'none'; form-action 'none'">
+  <title>Bread · Roblox login</title>
+  <link rel="stylesheet" href="./style.css">
+  <script src="./callback.js" defer></script>
+</head>
+<body>
+  <main>
+    <span class="badge">BREAD · ACCOUNT LINKING</span>
+    <h1 id="title">Finish linking Roblox</h1>
+    <p id="status" role="status">Start with /roblox login in Discord. After authorizing on Roblox, your login result will appear here.</p>
+    <section id="result-panel" hidden>
+      <ol>
+        <li>Copy the login result below.</li>
+        <li>Return to your private Bread login message in Discord.</li>
+        <li>Click <strong>Login</strong>, paste the complete result, and submit.</li>
+      </ol>
+      <label for="result">Your private login result</label>
+      <textarea id="result" rows="5" readonly spellcheck="false" autocomplete="off" aria-describedby="privacy"></textarea>
+      <button id="copy" type="button">Copy login result</button>
+      <p id="copy-status" role="status" aria-live="polite"></p>
+      <p id="expiry" class="notice" role="status">Submit within one minute of authorizing on Roblox.</p>
+      <p id="privacy">Keep this result private. Only paste it into the Bread login modal you opened yourself. This page does not send it to a server or save it in browser storage.</p>
+    </section>
+    <noscript>Enable JavaScript to copy your login result, or paste this page's full callback URL into the Bread login modal.</noscript>
+    <footer>Linking is completed by Bread in Discord. This page is not affiliated with Roblox.</footer>
+  </main>
+</body>
+</html>
