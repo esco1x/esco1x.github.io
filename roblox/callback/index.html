@@ -12,37 +12,24 @@
 </head>
 <body>
   <main>
-    <header class="topbar">
-      <span class="brand">BREAD<span class="brand-dot">.</span></span>
-      <span class="badge"><span class="status-dot" aria-hidden="true"></span> ACCOUNT LINKING</span>
+    <header>
+      <span class="brand">BREAD<span>.</span></span>
+      <span class="service">Roblox login</span>
     </header>
-    <div class="hero">
-      <div class="eyebrow">ROBLOX / CONNECT</div>
-    <h1 id="title">Finish linking Roblox</h1>
-    <p id="status" role="status">Start with /roblox login in Discord. After authorizing on Roblox, your login result will appear here.</p>
-    <div class="metadata"><span>OFFICIAL ROBLOX SIGN-IN</span><span>FINISH IN DISCORD</span></div>
+    <div class="content">
+      <h1 id="title">Link your Roblox account</h1>
+      <p id="status" role="status">Run <code>/roblox login</code> in Discord to get started.</p>
+      <section id="result-panel" hidden aria-label="Complete your login">
+        <label for="result">Login result</label>
+        <textarea id="result" rows="4" readonly spellcheck="false" autocomplete="off" aria-describedby="privacy expiry"></textarea>
+        <button id="copy" type="button">Copy login result</button>
+        <p id="copy-status" role="status" aria-live="polite"></p>
+        <p id="expiry" class="notice" role="status">Use within one minute of authorizing.</p>
+        <p id="privacy">Keep this private. Only paste it into Bread's Login form in Discord.</p>
+      </section>
+      <noscript>Enable JavaScript, or paste this page's full callback URL into Bread's Login form in Discord.</noscript>
     </div>
-    <section id="result-panel" hidden>
-      <div class="section-heading"><h2>ONE LAST STEP</h2><span>RETURN TO DISCORD</span></div>
-      <ol class="steps">
-        <li><span class="step-number" aria-hidden="true">01</span><div><strong>Copy your result</strong><span>Use the button below.</span></div></li>
-        <li><span class="step-number" aria-hidden="true">02</span><div><strong>Back to Bread</strong><span>Open your private login message.</span></div></li>
-        <li><span class="step-number" aria-hidden="true">03</span><div><strong>Paste &amp; connect</strong><span>Click Login and submit the result.</span></div></li>
-      </ol>
-      <div class="result-card">
-      <div class="result-heading">
-      <label for="result">Your private login result</label>
-      <span class="private-chip">PRIVATE</span>
-      </div>
-      <textarea id="result" rows="3" readonly spellcheck="false" autocomplete="off" aria-describedby="privacy"></textarea>
-      <button id="copy" type="button"><span>Copy login result</span><span aria-hidden="true">↗</span></button>
-      <p id="copy-status" role="status" aria-live="polite"></p>
-      <p id="expiry" class="notice" role="status">Submit within one minute of authorizing on Roblox.</p>
-      </div>
-      <p id="privacy">Keep this result private. Only paste it into the Bread login modal you opened yourself. This page does not send it to a server or save it in browser storage.</p>
-    </section>
-    <noscript>Enable JavaScript to copy your login result, or paste this page's full callback URL into the Bread login modal.</noscript>
-    <footer><span class="footer-brand">BREAD / ROBLOX</span><span>Finish linking in Discord.<br>This page is not affiliated with Roblox.</span></footer>
+    <footer>Not affiliated with Roblox.</footer>
   </main>
 </body>
 </html>
