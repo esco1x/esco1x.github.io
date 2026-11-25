@@ -1,5 +1,5 @@
 // Replace this one value with the direct Mega link for Relay-Setup-1.0.0.exe.
-const relayDownloadUrl ='https://mega.nz/file/oUwhRLqL#ew9flM4auPPpRE6mRlflJB3VJPdeT-aFE4TpJfuiry4';
+const relayDownloadUrl ='https://mega.nz/file/YAQyVbIT#szIOELHh_Qs3pD188uxeoquhdDqDzwAATULn_SJBOuU';
 document.querySelectorAll('[data-download]').forEach(link=>link.href=relayDownloadUrl);
 
 // Keep every destination in one compact top navigation bar.
